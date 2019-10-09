@@ -1,14 +1,17 @@
 *** Keywords ***
 Open App
+    [Tags]    Pocky
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
     ...    appActivity=${appActivity}    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
     Syetem language    ${language}
 
 Open VPN
+    [Tags]    Pocky
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=com.fvcorp.flyclient
     ...    appActivity=com.fvcorp.android.fvclient.activity.SplashActivity    noReset=True    autoGrantPermissions=${autoGrantPermissions}
 
 Pass Tutorial
+    [Tags]    Pocky
     ${buttonShow}    Run keyword and Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/getStartBtn
     Run keyword If    ${buttonShow}>0    Click Element    com.cyberlink.youcammakeup:id/getStartBtn
     ...    ELSE    Run keywords    Click Element    com.cyberlink.youcammakeup:id/tutorialSkipBtn
@@ -17,9 +20,11 @@ Pass Tutorial
     Sleep    3
 
 Enter Makeup Cam
+    [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
 
 Download sample photos
+    [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #Tap Yes button on the downlaoding sample photo dialog
     Wait Until Page Does Not Contain Element    com.cyberlink.youcammakeup:id/bc_upload_dialog_message    timeout=100
     : FOR    ${i}    IN RANGE    1    20    #向上划直到找到"YouCam Makeup Sample" text
@@ -31,6 +36,7 @@ Download sample photos
 
 Select Album
     [Arguments]    ${folderName}
+    [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
     : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
@@ -41,6 +47,7 @@ Select Album
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo, 除了找座標，怎麼樣才能點到別張照片？
 
 Select Sample Photo
+    [Tags]    Pocky
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
@@ -54,6 +61,7 @@ Select Sample Photo
     ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo, 除了找座標，怎麼樣才能點到別張照片？
 
 Subsribe
+    [Tags]    Pocky
     Wait Until Page Contains    7-DAY FREE TRIAL    timeout=10
     Click Text    7-DAY FREE TRIAL
     Wait Until Page Contains Element    com.android.vending:id/footer_placeholder
@@ -64,12 +72,14 @@ Subsribe
 
 Set photo quality
     [Arguments]    ${quality}
+    [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton    #Tap setting button
     Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
     Click text    ${quality}
 
 Switch Country
     [Arguments]    ${country}
+    [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
     Sleep    1
     : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"Contry/Region" text
@@ -87,6 +97,7 @@ Switch Country
 
 Syetem language
     [Arguments]    ${language}
+    [Tags]    Pocky
     ${region}=    Set Variable If    "${language}"=="ENU"    Country/Region    "${language}"=="CHS"    国家/地区
     Set Global Variable    ${region}
     ${about}=    Set Variable If    "${language}"=="ENU"    About    "${language}"=="CHS"    关于
