@@ -1,7 +1,7 @@
 *** Settings ***
 Suite Setup       Open VPN
 Library           AppiumLibrary
-Resource          YMK_Keyword.robot
+Resource          resource/YMK_Keyword.robot
 
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
@@ -18,7 +18,7 @@ ${language}       CHS
 *** Test Cases ***
 Select Album
     Pass Tutorial
-    #Select Album    YouCam Makeup
+    Select Album    YouCam Makeup
 
 Select sample photo
     Select Sample Photo
