@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Open VPN
+Suite Setup       Open App
 Library           AppiumLibrary
 Resource          resource/YMK_Keyword.robot
 
@@ -16,4 +16,11 @@ ${autoGrantPermissions}    True    #Auto allow permission
 ${language}       CHS
 
 *** Test Cases ***
-1.1 
+0.1 Switch Country to US
+    PASS Tutorial
+    Switch Country    United Status
+
+0.2 Set photo quality to Smart HD
+    Set photo quality Smart HD
+
+1.1 Apply all effects and Save
