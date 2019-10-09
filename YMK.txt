@@ -1,4 +1,4 @@
-*** Settings ***
+﻿*** Settings ***
 Suite Setup       Open APP
 Library           AppiumLibrary
 Resource          Resource/YMK_Keyword.robot
@@ -103,3 +103,5 @@ Test case 1
     [Documentation]    First line
     ...    \ \ Second line in \ \ \ multiple parts
     Open App
+
+abcd
