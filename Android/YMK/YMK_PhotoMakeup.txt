@@ -13,14 +13,16 @@ ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
 ${noReset}        False    #Ture: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
-${language}       CHS
 
 *** Test Cases ***
 0.1 Switch Country to US
+    [Tags]    Pocky
     PASS Tutorial
     Switch Country    United Status
 
 0.2 Set photo quality to Smart HD
-    Set photo quality Smart HD
+    [Tags]    Pocky
+    Set photo quality    Smart HD
 
 1.1 Apply all effects and Save
+    [Tags]    Pocky
