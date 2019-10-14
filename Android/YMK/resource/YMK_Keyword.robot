@@ -1,9 +1,11 @@
+*** Settings ***
+Library           AppiumLibrary
+
 *** Keywords ***
 Open App
     [Tags]    Pocky
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
     ...    appActivity=${appActivity}    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
-    Syetem language    ${language}
 
 Open VPN
     [Tags]    Pocky
@@ -102,3 +104,14 @@ Syetem language
     Set Global Variable    ${region}
     ${about}=    Set Variable If    "${language}"=="ENU"    About    "${language}"=="CHS"    关于
     Set Global Variable    ${about}
+
+Click Undo
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/EditViewUndoBtn
+    Click Element    com.cyberlink.youcammakeup:id/EditViewUndoBtn
+
+Click
+    [Arguments]    ${feature name}
+    [Tags]    Pocky
+    Wait Until Page Contains    ${feature name}
+    Click Text    ${feature name}
