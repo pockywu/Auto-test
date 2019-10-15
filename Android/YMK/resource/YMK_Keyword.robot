@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        True    #True: don't reset when open app. False: reset when open app
+${noReset}        False    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -125,7 +125,8 @@ Click
     [Arguments]    ${feature name}
     [Tags]    Pocky
     Wait Until Page Contains    ${feature name}
-
+    Click Text    ${feature name}
+	
 Apply Color
     [Tags]    Pocky
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
@@ -140,3 +141,8 @@ Adjust Seekbar
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
     ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 1)
     Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+
+Enter Settings
+    [Tags]    Ethan
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+

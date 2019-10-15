@@ -4,23 +4,13 @@ Library           AppiumLibrary
 Resource          resource/YMK_Keyword.robot
 
 *** Variables ***
-#Open App
-${REMOTE_URL}     http://localhost:4723/wd/hub
-${platformName}    Android
-${platformVersion}    9
-${deviceName}     Android
-${automationName}    UiAutomator2
-${appPackage}     com.cyberlink.youcammakeup
-${appActivity}    activity.SplashActivity
-${noReset}        True    #Ture: don't reset when open app. False: reset when open app
-${autoGrantPermissions}    True    #Auto allow permission
 #Log in
 ${Account}        ethan1@a.com
 ${Password}       aaaaaa
 
 *** Test Cases ***
-Skip Login
-    Skip Login
+01. Open Settings
+    Pass Tutorial
 
 Launch with an account
     ${NotLogIn}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/bc_have_an_account
