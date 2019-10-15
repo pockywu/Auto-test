@@ -16,5 +16,8 @@ Library           AppiumLibrary
 1.1 Apply all effects and Save
     [Tags]    Pocky
     Select Sample photo
+    Sleep    3
     Click Undo
+    Sleep    3
     Click    Mouth
+    Click    Teeth Whitener

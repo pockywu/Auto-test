@@ -1,0 +1,38 @@
+*** Settings ***
+Suite Setup       Open App
+Library           AppiumLibrary
+Resource          resource/YMK_Keyword.robot
+
+*** Variables ***
+#Log in
+${Account}        ethan1@a.com
+${Password}       aaaaaa
+
+*** Test Cases ***
+01. Open Settings
+    Pass Tutorial
+
+Launch with an account
+    ${NotLogIn}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/bc_have_an_account
+    Run Keyword If    '${NotLogIn}'=='True'    Run Keyword    Log in
+    ...    ELSE    Run Keyword    Get Start
+
+*** Keywords ***
+Open App2
+    Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=${AndroidVersion}    deviceName=Android    appPackage=${appPackage}    appActivity=${appActivity}
+    ...    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
+
+Skip Login
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/tutorialSkipBtn    #Wait until skip button shows
+    Click Element    com.cyberlink.youcammakeup:id/tutorialSkipBtn    # Tap Skip
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    # Tap Skip again
+
+Log in
+    Click Element    com.cyberlink.youcammakeup:id/bc_have_an_account
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/register_id    #Wait until input box shows
+    Input Text    com.cyberlink.youcammakeup:id/register_id    ${Account}    #Input account
+    Input Password    com.cyberlink.youcammakeup:id/register_password    ${Password}    #Input password
+    Click Element    com.cyberlink.youcammakeup:id/register_accept_btn    #Tap Log In button
+
+Get Start
+    Click Element    com.cyberlink.youcammakeup:id/getStartBtn

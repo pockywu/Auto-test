@@ -142,3 +142,23 @@ Launcher-Click Discover button
 Launcher-Click Home button
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
     Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
+	
+Apply Color
+    [Tags]    Pocky
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
+    Click Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
+
+Adjust Seekbar
+    [Tags]    Sol
+    ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
+    ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 1)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+
+Enter Settings
+    [Tags]    Ethan
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+
