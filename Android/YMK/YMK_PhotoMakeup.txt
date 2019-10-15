@@ -16,8 +16,13 @@ Library           AppiumLibrary
 1.1 Apply all effects and Save
     [Tags]    Pocky
     Select Sample photo
-    Sleep    3
-    Click Undo
-    Sleep    3
+    Sleep    4
+    Adjust Vertical Seekbar
+    #Click Undo
+    Sleep    2
     Click    Mouth
-    Click    Teeth Whitener
+    #Click Brand icon
+    #Click    PERFECT
+    #Apply Color
+    #Click    Teeth Whitener
+    #Adjust Horizontal Seekbar

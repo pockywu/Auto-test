@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    8
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        False    #True: don't reset when open app. False: reset when open app
+${noReset}        True    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -126,23 +126,38 @@ Click
     [Tags]    Pocky
     Wait Until Page Contains    ${feature name}
     Click Text    ${feature name}
-	
+
 Apply Color
     [Tags]    Pocky
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
     Click Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
 
-Adjust Seekbar
-    [Tags]    Sol
+Adjust Horizontal Seekbar
+    [Arguments]    ${intensity_value}
+    [Tags]    Pocky
+    ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
+    ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} \ * 0)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 1)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1500
+
+Adjust Vertical Seekbar
+    [Tags]    Pocky
     ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
-    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
-    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 1)
-    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1500
 
 Enter Settings
     [Tags]    Ethan
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
 
+Click Brand icon
+    [Tags]    Pocky
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/brandBackground
+    Click Element    com.cyberlink.youcammakeup:id/brandBackground
