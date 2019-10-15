@@ -3,17 +3,6 @@ Suite Setup       Open App
 Resource          resource/YMK_Keyword.robot
 Library           AppiumLibrary
 
-*** Variables ***
-${REMOTE_URL}     http://localhost:4723/wd/hub
-${platformName}    Android
-${platformVersion}    8
-${deviceName}     Android
-${appPackage}     com.cyberlink.youcammakeup
-${appActivity}    activity.SplashActivity
-${automationName}    UiAutomator2
-${noReset}        True    #True: don't reset when open app. False: reset when open app
-${autoGrantPermissions}    True    #Auto allow permission
-
 *** Test Cases ***
 0.1 Switch Country to US
     [Tags]    Pocky
@@ -29,3 +18,4 @@ ${autoGrantPermissions}    True    #Auto allow permission
     Select Sample photo
     Click Undo
     Click    Mouth
+    Click    Teeth Whitner

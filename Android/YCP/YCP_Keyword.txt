@@ -1,0 +1,656 @@
+*** Settings ***
+Library           AppiumLibrary
+
+*** Keywords ***
+dialog_ok
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/alertDialog_buttonPositive
+
+dialog_cancel
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/alertDialog_buttonNegative
+
+permisson_allow
+    [Tags]    Carolyn
+    Click Element    com.android.packageinstaller:id/permission_allow_button
+
+permission_deny
+    [Tags]    Carolyn
+    Click Element    com.android.packageinstaller:id/permission_deny_button
+
+tutorials_skip
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/tutorialSkipBtn
+
+tutorials_login_more
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/tutorial_login_more
+
+tutorials_fb
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/tutorial_fb_login
+
+signup_email
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/tutorial_email_login
+
+birthday
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/register_birthday
+
+email
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/register_id
+
+signup_next
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/top_bar_right_text_btn
+
+bc
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/launcherBcBtn
+
+bc_tab_me
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/bottom_bar_tab_me
+
+bc_settings
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/setting_btn
+
+bc_logout
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/bc_log_out_btn
+
+bc_register_now
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/register_now_btn
+
+bc_loginhere
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/bc_have_an_account
+
+bc_login
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/register_accept_btn
+
+login_fb
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/bc_fb_login
+
+login_more
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/bc_fb_more
+
+followpeople_done
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/top_bar_right_text_btn
+
+promo_close
+    [Tags]    Carolyn
+    Click Element    com.cyberlink.youperfect:id/promote_close_btn
+
+swipe_up_bc_setting
+    ${element_size}=    Get Element Size    id=com.cyberlink.youperfect:id/me_plus_about_outter
+    ${element_location}=    Get Element Location    id=com.cyberlink.youperfect:id/me_plus_about_outter
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.7)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.3)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+    Sleep    1
+
+swipe_down_bc_setting
+    ${element_size}=    Get Element Size    id=com.cyberlink.youperfect:id/me_plus_about_outter
+    ${element_location}=    Get Element Location    id=com.cyberlink.youperfect:id/me_plus_about_outter
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.3)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.7)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+    Sleep    1
+
+photo_edit
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/launcher_edit
+
+photo_picker
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/albumItemImage
+
+selectphoto
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/photoItemImage
+
+lobby_edit
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarEditBtn
+
+swipe_lobby_menu_1
+    [Tags]    Carl
+    #lobby menu swipe 1 time
+    Swipe    987    2025    40    2025
+
+swipe_effect_screen_1
+    [Tags]    Carl
+    Swipe By Percent    90    50    10    50    200    #滑螢幕從X座標90% to 10%,Y座標50%,iOS不能滑螢幕要用Swipe寫法
+
+swipe_effect_screen_any_effect
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    200    #向右划直到找到"Cake" text,iOS不能滑螢幕要用Swipe寫法
+    \    Swipe By Percent    90    50    10    50    200
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${effectname}')]
+    \    Exit For Loop If    ${count}>0
+
+edit_effects
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarEditEffectBtn
+
+effect_seekbar
+    [Tags]    Carl
+    Click A Point    ${effect_seekbar_value_x}    ${effect_seekbar_value_y}
+
+edit_crop
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarCropBtn
+
+crop_controlbar
+    [Tags]    Carl
+    Sleep    1
+    Click A Point    ${crop_seekbar_value_x}    ${crop_seekbar_value_y}
+
+crop_rotate
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/img_rotate_btn
+
+crop_mirror
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/img_mirror_btn
+
+crop_free
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/img_free_btn
+
+crop_1x1
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/img_1x1_btn
+
+crop_2x3
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/img_2x3_btn
+
+crop_3x2
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/img_3x2_btn
+
+crop_3x4
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"3:4" icon的位置
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@resource-id,'com.cyberlink.youperfect:id/img_3x4_btn')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/img_3x4_btn
+
+crop_4x3
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"4:3" icon的位置
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@resource-id,'com.cyberlink.youperfect:id/img_4x3_btn')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/img_4x3_btn
+
+crop_9x16
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"9x16" icon的位置
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@resource-id,'com.cyberlink.youperfect:id/img_9x16_btn)]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/img_9x16_btn
+
+crop_16x9
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"16x9" icon的位置
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@resource-id,'com.cyberlink.youperfect:id/img_16x9_btn)]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/img_16x9_btn
+
+crop_reset
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/ResetTextBtn
+
+edit_removal
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarRemovalBtn
+
+removal_premium_upgrade
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/removal_container_positive
+
+removal_premium_no
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/removal_container_negative
+
+removal_apply
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/removalPanelApply
+
+removal_eraser
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/removalPanelEraseBtn
+
+removal_brush
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/removalPanelBrushBtn
+
+removal_brush_point
+    [Tags]    Carl
+    Swipe    ${removal_brush_point_x1}    ${removal_brush_point_y1}    ${removal_brush_point_x2}    ${removal_brush_point_y2}
+
+edit_addphoto
+    [Tags]    Carl
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarAddPhotoBtn
+
+edit_adjust
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarAdjustBtn
+
+adjust_exposure
+    [Tags]    Carl
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/ToneExposure
+
+adjust_contrast
+    [Tags]    Carl
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/ToneContrast
+
+adjust_temperature
+    [Tags]    Carl
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/WbTemperature
+
+adjust_tint
+    [Tags]    Carl
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/WbTint
+
+adjust_saturation
+    [Tags]    Carl
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/Saturation
+
+adjust_highlights
+    [Tags]    Carl
+    Sleep    1
+    Swipe    987    2025    40    2025
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/ToneHighlights
+
+adjust_shadows
+    [Tags]    Carl
+    Sleep    1
+    Swipe    987    2025    40    2025
+    Sleep    1
+    Click Element    com.cyberlink.youperfect:id/ToneShadows
+
+adjust_seekbar
+    [Tags]    Carl
+    Sleep    3
+    Click A Point    ${adjust_seekbar_value_x}    ${adjust_seekbar_value_y}
+
+edit_frame
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Frame" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Frame')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarFrameBtn
+
+frame_singleframe
+    Repeat    frame_singleframe    #目前有問題,先跳過
+
+edit_clone
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Clone" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Clone')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarCloneBtn
+
+edit_cutout
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Cutout" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Cutout')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarCutoutBtn
+
+edit_text
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Text" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Text')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarTextBubbleBtn
+
+edit_mosaic
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Mosaic" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Mosaic')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarMosaicBtn
+
+edit_sticker
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Sticker" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Sticker')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarStickerBtn
+
+edit_hdr
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"HDR" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'HDR')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarHDRBtn
+
+edit_blur
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    5    #向右划直到找到"Blur" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Blur')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarBlurBtn
+
+edit_vignette
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"Vignette" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Vignette')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarVignetteBtn
+
+edit_scene
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"Scene" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Scene')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarSceneBtn
+
+edit_magicbrush
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"Magic Brush" text
+    \    Swipe    987    2025    40    2025    500
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Magic Brush')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarMagicBrushBtn
+
+edit_overlays
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"Overlays" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Overlays')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarBasicOverlayBtn
+
+edit_brush
+    [Tags]    Carl
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    20    #向右划直到找到"Brush" text
+    \    Swipe    987    2025    40    2025
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Brush')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarBrushBtn
+
+toolbar_apply
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/toolBarApplyBtn
+
+toolbar_close
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/toolBarCloseBtn
+
+lobby_undo
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/EditViewUndoBtn
+
+lobby_redo
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/EditViewRedoBtn
+
+lobby_save
+    [Tags]    Carl
+    Click Element    com.cyberlink.youperfect:id/topToolBarExportBtn
+
+cam
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/launcher_camera
+
+switch_cam
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraFacingButton
+
+capture
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/action_photo_shot_btn
+
+touch_screen
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/DialogDismissBackground    #skip "swipe left/right to change applied effect."
+
+cam_save
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/acton_photo_result_apply_btn
+
+cam_back
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraBackButton
+
+promotion_close
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/promote_close_btn
+
+cam_record_switch
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/action_switch_mode
+
+cam_effect
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_effects
+
+cam_frame
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_frame
+
+settings
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/settingButton
+
+photo_edit
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/launcher_edit
+
+library
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/albumItemImage
+
+select_photo
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/photoItemImage
+
+cam_beautify_preset
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraBeautifyAddPresetBtn
+
+cam_timer
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraTimerButton
+
+cam_flish
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/flashModeButton
+
+cam_menu
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/camera_menu_btn
+
+cam_blur
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/liveBlurButton
+
+cam_ratio
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/liveAspratioButton
+
+cam_grid
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/liveLineButton
+
+cam_time_stamp
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraTimeStamp
+
+cam_mode_switch
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraSettingButton
+
+cam_general
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureGeneralButton
+
+cam_touch
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureTouchButton
+
+cam_detect
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureDetectButton
+
+cam_wave
+    Click Element    com.cyberlink.youperfect:id/captureWaveDetectButton
+
+cam_disable_enable_panel
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_close
+
+cam_effect_frame_store
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/effect_store_btn
+
+cam_exposure
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/ExposureSeekBar
+
+cam_exposure_down
+    [Tags]    Sol
+    ${element_size}=    Get Element Size    id=com.cyberlink.youperfect:id/ExposureSeekBar
+    ${element_location}=    Get Element Location    id=com.cyberlink.youperfect:id/ExposureSeekBar
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 1)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+
+beautify_auto
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarBestFaceBtn
+    Run Keyword And Return Status    Wait Until Page Contains    text = 'Contoured'
+
+beautify_effects
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarBeautifyEffectBtn
+
+beautify_change_effect
+    [Tags]    Weiting
+    Click A Point    1009    2400    100
+
+beautify_change_effect_keep
+    [Tags]    Weiting
+    Repeat Keyword ${20} ${change_effect}
+
+beautify_smooth
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarSkinSmoothenBtn
+
+beautify_face_fhaper
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarFaceReshapeBtn
+
+beautify_tone
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarSkinWhitenBtn
+
+beautify_nose_enhance
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarContourNoseBtn
+
+beautify_eye_bag
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarEyeBagBtn
+
+beautify_enlarger
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarEnlargeEyeBtn
+
+beautify_acne
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarPimpleBtn
+
+beautify_blush
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarComplexionBtn
+
+beautify_taller
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarTallerBtn
+
+beautify_body_shaper
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarSlimBtn
+
+beautify_smile
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarSmileBtn
+
+beautify_oil_free
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarOilRemovalBtn
+
+beautify_contour
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarContourFaceBtn
+
+beautify_brighten
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarSparkleEyeBtn
+
+beautify_double_eyelid
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarEyelidBtn
+
+beautify_red_eye
+    [Tags]    Weiting
+    Click Element    com.cyberlink.youperfect:id/bottomToolBarRedEyeBtn
