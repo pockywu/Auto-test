@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        True    #True: don't reset when open app. False: reset when open app
+${noReset}        False    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -126,3 +126,7 @@ Click
     [Tags]    Pocky
     Wait Until Page Contains    ${feature name}
     Click Text    ${feature name}
+
+Enter Settings
+    [Tags]    Ethan
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
