@@ -29,3 +29,4 @@ ${autoGrantPermissions}    True    #Auto allow permission
     Select Sample photo
     Click Undo
     Click    Mouth
+    Click    Teeth Whitner
