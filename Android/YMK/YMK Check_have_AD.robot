@@ -1,28 +1,32 @@
 *** Settings ***
-Suite Setup       skipTutorial
+Suite Setup       Open App
 Library           AppiumLibrary
+Resource          resource/YMK_Keyword.robot
 
 *** Variables ***
-${platformVersion}    9
-${autoGrantPermissions}    True
 
 *** Test Cases ***
 Check launcher trending AD
+    [Tags]    Shura
+    Pass Tutorial
     Sleep    3
     : FOR    ${i}    IN RANGE    1    20
     \    Swipe    400    1000    400    500    200
     \    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/google_ad_panel
-    \    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Launcher have AD\n    append=yes
-    \    ...    AND    Capture Page Screenshot    1-launcherAD.png
-    \    ...    AND    Exit For Loop
+    \    Run Keyword If    ${count} == 0    Exit For Loop
     Run Keyword if    ${count} > 0    Run Keywords    FAIL    Launcher No AD
     ...    AND    Capture Page Screenshot    1-launcherAD.png
-    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add    #回到頂端
-    ${count}    Set Variable    1
+    ${ScreenHight}    Get Window Height
+    ${ScreenHight}=    Evaluate    ${ScreenHight}/2
+    ${Size}    Get Element Location    com.cyberlink.youcammakeup:id/google_ad_panel
+    Run Keyword if    ${Size['y']} > ${ScreenHight}    Swipe    400    ${Size['y']}    400    ${ScreenHight}
+    Set Test Message    Launcher have AD\n    append=yes
+    Capture Page Screenshot    1-launcherAD.png
+    #Launcher-Click Home button    #回到頂端
 
 Check trending AD
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bottom_bar_tab_discover
-    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_discover
+    [Tags]    Shura
+    Launcher-Click Discover button
     : FOR    ${i}    IN RANGE    1    20
     \    Swipe    400    1000    400    450
     \    Sleep    1
@@ -30,11 +34,14 @@ Check trending AD
     \    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Trending have AD    append=yes
     \    ...    AND    Capture Page Screenshot    2-trendingAD.png
     \    ...    AND    Exit For Loop
-    Run Keyword if    ${count} > 0    Fail    Trending No AD
+    Run Keyword if    ${count} > 0 2    Fail    Trending No AD
+    ${Size}    Get Element Size    com.cyberlink.youcammakeup:id/google_contentView
+    log    ${Size}
 
 Check photo picker AD
-    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add    #點Home
-    checkSubscriptionAndClose
+    [Tags]    Shura
+    Launcher-Click Home button    #點Home
+    CheckSubscriptionAndClose
     Run Keywords    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
@@ -48,7 +55,8 @@ Check photo picker AD
     \    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
     Run Keyword If    ${count} == 0    FAIL    Photo Picker no AD
 
-Check result page AD
+Check result page whole page AD
+    [Tags]    Shura
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #選照片
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn    #Save button
     Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn    #點save
@@ -79,7 +87,7 @@ skipTutorial
     ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/getStartBtn
     #Run Keyword If    ${loginstatus} == 0    Run Keyword    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
 
-checkSubscriptionAndClose
+CheckSubscriptionAndClose
     Sleep    3
     ${subscriptioncheck}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/promote_background
     Run Keyword If    ${subscriptioncheck}>0    Run Keywords    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/promote_close_btn

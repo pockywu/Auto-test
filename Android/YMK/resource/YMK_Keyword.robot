@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        True    #True: don't reset when open app. False: reset when open app
+${noReset}        False    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -126,3 +126,19 @@ Click
     [Tags]    Pocky
     Wait Until Page Contains    ${feature name}
     Click Text    ${feature name}
+
+CheckSubscriptionAndClose
+    [Tags]    Shura
+    Sleep    3
+    ${subscriptioncheck}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/promote_background
+    Run Keyword If    ${subscriptioncheck}>0    Run Keywords    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/promote_close_btn
+    ...    AND    Click Element    com.cyberlink.youcammakeup:id/promote_close_btn
+
+Launcher-Click Discover button
+    [Tags]    Shura
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bottom_bar_tab_discover
+    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_discover
+
+Launcher-Click Home button
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
+    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
