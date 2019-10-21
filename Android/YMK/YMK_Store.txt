@@ -1,0 +1,240 @@
+*** Settings ***
+Library           AppiumLibrary
+
+*** Variables ***
+${REMOTE_URL}     http://localhost:4723/wd/hub
+${platformName}    Android
+${platformVersion}    8.1.0
+${deviceName}     Android
+${automationName}    uiautomator2
+${appPackage}     com.cyberlink.youcammakeup
+${appActivity}    activity.SplashActivity
+${OnReset}        Ture
+${tile}           Photo Makeup
+${photo_folder}    YouCam Makeup Sample
+${Look_name}      Exquisite
+${Photo_quality}    Ultra High
+${Premium Collections}    Halloween Glamour Collection
+${Look folder}    New
+${Look Name}      UptownChic
+${Costume folder}    New
+${Costume Name}    Buttomed Up
+
+*** Test Cases ***
+TestCase1
+    Open App
+
+Permission
+    Set Permission
+
+Skip openning
+    Skip open tutorial
+
+Select a photo
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherTilesRegion
+    Click text    ${tile}
+    Click text    ${photo_folder}
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/lookItemName
+    Click text    ${Look_name}
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+    Click text    Save
+
+Result page back to launcher
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/sharePageTopBarFunction
+    Click Element    com.cyberlink.youcammakeup:id/sharePageHomeButton
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/dialogExContainer
+    Click Element    com.cyberlink.youcammakeup:id/promote_close_btn
+
+Select photo quality
+    Run Keyword If    '${Photo_quality}'== 'Smart HD'    Run Keywords    Smart HD
+    ELSE IF    '${Photo_quality}'== 'Ultra High'    Ultra High
+
+Change to Ultra High
+    Ultra High
+
+Change to Smart HD
+    Smart HD
+
+Clear Data
+    Reset Application
+
+Back to Launcher
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/dialogExContainer
+    Click Element    com.cyberlink.youcammakeup:id/promote_close_btn
+
+*** Keywords ***
+Open App
+    Open Application    http://localhost:4723/wd/hub    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
+    ...    appActivity=${appActivity}    OnReset=${OnReset}    app=${CURDIR}${/}app${/}YouCamMakeup-5.56.1.5801.34011137.apk
+
+Set Permission
+    Wait Until Page Contains Element    com.android.packageinstaller:id/permission_message
+    Click Element    com.android.packageinstaller:id/permission_allow_button
+
+Skip open tutorial
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/tutorialSkipBtn
+    Click Element    com.cyberlink.youcammakeup:id/tutorialSkipBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+
+Ultra High
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
+    Click text    Ultra High
+    Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
+
+Smart HD
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
+    Click text    Smart HD
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/dialogExContainer
+    Click text    7-DAY FREE TRIAL
+    Wait Until Page Contains Element    com.android.vending:id/content
+    Click Element    com.android.vending:id/footer_placeholder
+    Wait Until Page Contains Element    com.android.vending:id/input
+    Input Password    com.android.vending:id/input    qwer800526
+    Click text    VERIFY
+
+Store Start free 7-day trial
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherSubscriptionEntryButton
+    Click text    7-DAY FREE TRIAL
+    Click Element    com.android.vending:id/footer_placeholder
+
+Store Live preview (not subscribe)
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    ${Premium Collections}
+    Click text    Live Preview
+
+Store Use (look/accessroies)
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    ${Premium Collections}
+    Click text    Start free 7-day trial
+    Click Element    com.android.vending:id/footer_placeholder
+    Click text    Download
+    Click text    Use
+    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
+
+Natural Looks
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    ${Look folder}
+    Click text    ${Look Name}
+
+Costume Looks
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Costume
+    Click text    ${Costume folder}
+    Click text    ${Costume Name}
+
+Eyeshadow
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Eye Shadow
+    Click text    3
+    Click text    thumb_palettes_2
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Eyeliner
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Eyeliner
+    Click Element    All >
+    Click text    pattern_eyeline_190319_store_05
+    Click text    pattern_eyeline_190319_store_05
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Eyelashes
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Eyelashes
+    Click text    patten_eyelash_01_11
+    Click text    patten_eyelash_01_11
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Face Paint
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Face Paint
+    Click text    pattern_faceart_180119_cny_face_01
+    Click text    pattern_faceart_180119_cny_face_01
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Hair
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Hair
+    Click text    patten_wig_20150430_02
+    Click text    patten_wig_20150430_02
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Eyewear
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Eyewear
+    Click text    eyewear_190328_2D_chanel_27_thumb
+    Click text    eyewear_190328_2D_chanel_27_thumb
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Headband
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Headband
+    Click text    pattern_190225_Studio_HD
+    Click text    pattern_190225_Studio_HD
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+
+Accessories
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
+    Click Element    com.cyberlink.youcammakeup:id/launcherExtra
+    Click text    Accessories
+    Click text    thumb_earring_03
+    Click text    thumb_earring_03
+    Click text    YouCam Makeup Sample
+    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
+

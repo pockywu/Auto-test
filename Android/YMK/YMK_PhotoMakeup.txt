@@ -16,8 +16,118 @@ Library           AppiumLibrary
 1.1 Apply all effects and Save
     [Tags]    Pocky
     Select Sample photo
-    Sleep    3
     Click Undo
-    Sleep    3
+    Sleep    2
     Click    Mouth
+    Select PERFECT Brand
+    Apply Color
     Click    Teeth Whitener
+    Adjust Horizontal Seekbar
+    Click    Face
+    Adjust Horizontal Seekbar
+    Click    Foundation
+    Select PERFECT Brand
+    Apply Color
+    Click    Blush
+    Select PERFECT Brand
+    Apply Color
+    Click    Contour
+    Select PERFECT Brand
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/room_tab_color
+    Click Element    com.cyberlink.youcammakeup:id/room_tab_color
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/colorView
+    Click Element    com.cyberlink.youcammakeup:id/colorView
+    Scroll Makeup Menu
+    Click    Highlight
+    Select PERFECT Brand
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/room_tab_color
+    Click Element    com.cyberlink.youcammakeup:id/room_tab_color
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/colorView
+    Click Element    com.cyberlink.youcammakeup:id/colorView
+    Click    Face Paint
+    Apply Pattern
+    Click    Face Shaper
+    Adjust Horizontal Seekbar
+    Click    Nose Enhance
+    Adjust Horizontal Seekbar
+    Scroll Makeup Menu
+    Click    Blemish
+    Click Switch Button
+    Click    Shine Removal
+    Adjust Horizontal Seekbar
+    Click    Eye
+    Select PERFECT Brand
+    Apply Color
+    Click    Eyelashes
+    Select PERFECT Brand
+    Apply Pattern
+    Click    Eye Shadow
+    Select PERFECT Brand
+    Click    5 Colors
+    Click    Eyebrows
+    Select PERFECT Brand
+    Apply Color
+    Scroll Makeup Menu
+    Click    Eye Color
+    Apply Pattern
+    Click    Eye Bag
+    Adjust Horizontal Seekbar
+    Click    Eye Tuner
+    Adjust Horizontal Seekbar
+    Scroll Makeup Menu
+    Click    Brighten
+    Adjust Horizontal Seekbar
+    Click    Double Eyelid
+    Apply Pattern
+    Adjust Horizontal Seekbar
+    Click    Red-Eye
+    Click Switch Button
+    Scroll Makeup Menu
+    Click    Hair
+    Select PERFECT Brand
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/colorContainer
+    Click Element    com.cyberlink.youcammakeup:id/colorContainer
+    Click    Hair Style
+    Apply Pattern
+    Click    Accessories
+    Apply Pattern
+    Click    Eyewear
+    Apply Pattern
+    Click    Headband
+    Apply Pattern
+    Click    Necklace
+    Apply Pattern
+    Click    Earrings
+    Apply Pattern
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+
+1.1 test
+    Select Sample photo
+    Click Undo
+    Sleep    2
+    Click    Face
+    Scroll Makeup Menu
+    Scroll Makeup Menu
+    Click    Eye
+    Scroll Makeup Menu
+    Scroll Makeup Menu
+    Scroll Makeup Menu
+    Click    Hair
+    Select PERFECT Brand
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/colorContainer
+    Click Element    com.cyberlink.youcammakeup:id/colorContainer
+    Click    Hair Style
+    Apply Pattern
+    Click    Accessories
+    Apply Pattern
+    Click    Eyewear
+    Apply Pattern
+    Click    Headband
+    Apply Pattern
+    Click    Necklace
+    Apply Pattern
+    Click    Earrings
+    Apply Pattern
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn

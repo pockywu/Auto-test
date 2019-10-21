@@ -127,7 +127,7 @@ Click Undo
 Click
     [Arguments]    ${feature name}
     [Tags]    Pocky
-    Wait Until Page Contains    ${feature name}
+    Wait Until Page Contains    ${feature name}    timeout=10
     Click Text    ${feature name}
 
 CheckSubscriptionAndClose
@@ -151,18 +151,30 @@ Launcher-Click Home button
 
 Apply Color
     [Tags]    Pocky
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/colorItemColorTexture    timeout=10
     Click Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
 
-Adjust Seekbar
-    [Tags]    Sol
+Adjust Horizontal Seekbar
+    [Tags]    Pocky
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/unitSeekBar
+    ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
+    ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 1)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1500
+
+Adjust Vertical Seekbar
+    [Tags]    Pocky
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/unitSeekBar
     ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
-    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
-    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 1)
-    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1500
 
 Enter Settings
     [Tags]    Ethan
@@ -179,3 +191,48 @@ Launcher-Click Setting button
 Launcher-Click Makeup Cam
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
+
+Select PERFECT Brand
+    [Tags]    Pocky
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/toolView
+    Click Element    com.cyberlink.youcammakeup:id/toolView
+    ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/skuVendorMenu
+    ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/skuVendorMenu
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.2)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
+    : FOR    ${i}    IN RANGE    1    10
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
+    \    Exit For Loop If    ${count}>0
+    \    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
+    Click    PERFECT
+
+Scroll Makeup Menu
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
+    ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
+    ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.8)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.2)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1000
+
+Apply Pattern
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image    timeout=10
+    Click Element    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
+
+Click Switch Button
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/switchBtn
+    Click Element    com.cyberlink.youcammakeup:id/switchBtn
+
+Tap Switch
+    [Arguments]    ${Settings_catrgory}
+    [Tags]    Ethan
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
+    ${start_x}=    Evaluate    ${element_location['x']} + 900
+    ${start_y}=    Evaluate    ${element_location['y']} + 10
+    Click Element At Coordinates    ${start_x}    ${start_Y}    #目前只能土法煉鋼，針對不同resolution還要再想想
