@@ -4,17 +4,15 @@ Library           AppiumLibrary
 Resource          resource/YMK_Keyword.robot
 
 *** Variables ***
-#Log in
-${Account}        ethan1@a.com
-${Password}       aaaaaa
 
 *** Test Cases ***
 01. Open Settings
     Pass Tutorial
     Enter Settings
 
-02. Tap "Auto Save Photo"
-    ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/bc_selector_left_text
-    ${start_x}=    Evaluate    ${element_location['x']} + 900
-    ${start_y}=    Evaluate    ${element_location['y']} + 10
-    Click Element At Coordinates    ${start_x}    ${start_Y}
+02. Camera
+    Tap Switch    Auto Save Photo
+    Tap Switch    Front Camera Mirror
+    Tap Switch    Skin Beautifier
+    Tap Switch    Countdown Sound Effect
+    Tap Switch    Face Metering

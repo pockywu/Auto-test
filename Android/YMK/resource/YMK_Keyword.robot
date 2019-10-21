@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        True    #True: don't reset when open app. False: reset when open app
+${noReset}        False    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -210,3 +210,11 @@ Click Switch Button
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/switchBtn
     Click Element    com.cyberlink.youcammakeup:id/switchBtn
+
+Tap Switch
+    [Arguments]    ${Settings_catrgory}
+    [Tags]    Ethan
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
+    ${start_x}=    Evaluate    ${element_location['x']} + 900
+    ${start_y}=    Evaluate    ${element_location['y']} + 10
+    Click Element At Coordinates    ${start_x}    ${start_Y}    #目前只能土法煉鋼，針對不同resolution還要再想想
