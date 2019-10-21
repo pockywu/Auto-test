@@ -6,9 +6,43 @@ Resource          resource/YMK_Keyword.robot
 *** Variables ***
 
 *** Test Cases ***
-Check launcher trending AD
+Check launcher banner AD
     [Tags]    Shura
     Pass Tutorial
+    Launcher-Click Setting button    #Click setting button
+    Press Keycode    4
+    Sleep    3
+    Press Keycode    4    #close subscription page
+    Sleep    3
+    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/background_native_ad_container    #AD banner
+    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Launcher Banner have AD
+    ...    AND    Capture Page Screenshot    LauncherBannerAD.png
+    ...    ELSE    Fail    Launcher Banner no AD
+
+Check launcher AD tile
+    [Tags]    Shura
+    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/native_ad_icon    #AD TILE
+    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Launcher have AD tile
+    ...    AND    Capture Page Screenshot    LauncherADtile.png
+    ...    ELSE    Fail    Launcher no AD tile
+
+Check camera back AD
+    Launcher-Click Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/before    100
+    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
+    Sleep    3
+    Launcher-Click Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/before    100
+    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
+    Sleep    3
+    ${Status}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn    #檢查有沒有看到makeup cam button
+    Run Keyword if    ${Status} == 0    Fail    No AD when back from makeup cam
+    Run Keyword if    ${Status} > 0    Run Keywords    Set Test Message    Have AD when back from makeup cam
+    ...    AND    Capture Page Screenshot    makeupcambackAD.PNG
+    ...    AND    Press Keycode    4
+
+Check launcher trending AD
+    [Tags]    Shura
     Sleep    3
     : FOR    ${i}    IN RANGE    1    20
     \    Swipe    400    1000    400    500    200
@@ -22,7 +56,7 @@ Check launcher trending AD
     Run Keyword if    ${Size['y']} > ${ScreenHight}    Swipe    400    ${Size['y']}    400    ${ScreenHight}
     Set Test Message    Launcher have AD\n    append=yes
     Capture Page Screenshot    1-launcherAD.png
-    #Launcher-Click Home button    #回到頂端
+    Launcher-Click Home button    #回到頂端
 
 Check trending AD
     [Tags]    Shura
@@ -34,16 +68,12 @@ Check trending AD
     \    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Trending have AD    append=yes
     \    ...    AND    Capture Page Screenshot    2-trendingAD.png
     \    ...    AND    Exit For Loop
-    Run Keyword if    ${count} > 0 2    Fail    Trending No AD
-    ${Size}    Get Element Size    com.cyberlink.youcammakeup:id/google_contentView
-    log    ${Size}
+    Run Keyword if    ${count} > 0    Fail    Trending No AD
 
 Check photo picker AD
     [Tags]    Shura
     Launcher-Click Home button    #點Home
-    CheckSubscriptionAndClose
-    Run Keywords    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
-    ...    AND    Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
+    Launcher-Click Photo Makeup button
     Sleep    2
     : FOR    ${i}    IN RANGE    1    4
     \    Select Sample Photo
