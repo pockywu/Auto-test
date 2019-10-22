@@ -231,11 +231,13 @@ Click Switch Button
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/switchBtn
     Click Element    com.cyberlink.youcammakeup:id/switchBtn
 
-Tap Switch
+Click Switch
     [Arguments]    ${Settings_catrgory}
     [Tags]    Ethan
+    #On Launcher Setting
     ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
-    ${start_x}=    Evaluate    ${element_location['x']} + 900
+    ${screen_width}=    Get Window Width
+    ${start_x}=    Evaluate    ${screen_width} * 0.9
     ${start_y}=    Evaluate    ${element_location['y']} + 10
     Click Element At Coordinates    ${start_x}    ${start_Y}    #目前只能土法煉鋼，針對不同resolution還要再想想
 
@@ -262,3 +264,6 @@ Log in
     ...    AND    Input text    com.cyberlink.youcammakeup:id/register_id    ${email}
     ...    AND    Input text    com.cyberlink.youcammakeup:id/register_password    ${password}
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/register_accept_btn
+
+
+
