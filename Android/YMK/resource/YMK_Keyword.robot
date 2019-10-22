@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    8
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        False    #True: don't reset when open app. False: reset when open app
+${noReset}        True    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -109,7 +109,7 @@ Switch Country
     ...    AND    Press Keycode    66
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/country_name
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
-    ...    ELSE    log    The country is already China
+    ...    ELSE    log    The country is already ${country}
 
 Syetem language
     [Arguments]    ${language}
@@ -127,7 +127,7 @@ Click Undo
 Click
     [Arguments]    ${feature name}
     [Tags]    Pocky
-    Wait Until Page Contains    ${feature name}    timeout=10
+    Wait Until Page Contains    ${feature name}    timeout=30
     Click Text    ${feature name}
 
 CheckSubscriptionAndClose
@@ -210,7 +210,7 @@ Select PERFECT Brand
 
 Scroll Makeup Menu
     [Tags]    Pocky
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar    timeout=10
     ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
     ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.8)
@@ -221,8 +221,10 @@ Scroll Makeup Menu
 
 Apply Pattern
     [Tags]    Pocky
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image    timeout=10
-    Click Element    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
+    #Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image    timeout=10
+    #Click Element    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
+    Sleep    10
+    Click Element    xpath=//android.widget.FrameLayout[@content-desc='pattern 3 button']
 
 Click Switch Button
     [Tags]    Pocky
@@ -236,3 +238,27 @@ Tap Switch
     ${start_x}=    Evaluate    ${element_location['x']} + 900
     ${start_y}=    Evaluate    ${element_location['y']} + 10
     Click Element At Coordinates    ${start_x}    ${start_Y}    #目前只能土法煉鋼，針對不同resolution還要再想想
+
+Scroll down to Find
+    [Arguments]    ${Name}
+    [Tags]    Pocky
+    Sleep    2
+    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
+    \    Exit For Loop If    ${count}>0
+    \    Swipe    400    1000    400    300    400
+    Click text    ${Name}
+
+Save
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn    timeout=30
+    Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+
+Log in
+    [Arguments]    ${email}    ${password}
+    [Tags]    Pocky
+    ${login}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/bc_have_an_account
+    Run keyword if    ${login}>0    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/bc_have_an_account
+    ...    AND    Input text    com.cyberlink.youcammakeup:id/register_id    ${email}
+    ...    AND    Input text    com.cyberlink.youcammakeup:id/register_password    ${password}
+    ...    AND    Click Element    com.cyberlink.youcammakeup:id/register_accept_btn
