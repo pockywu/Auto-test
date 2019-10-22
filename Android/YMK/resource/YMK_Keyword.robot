@@ -22,6 +22,13 @@ Open VPN
     [Tags]    Pocky
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=com.fvcorp.flyclient
     ...    appActivity=com.fvcorp.android.fvclient.activity.SplashActivity    noReset=True    autoGrantPermissions=${autoGrantPermissions}
+    Sleep    3
+    Click Element    com.fvcorp.flyclient:id/selectedServer
+    Wait Until Page Contains    America
+    Click Text    America
+    Wait Until Page Contains    Brazil
+    Click Text    Brazil
+    Wait Until Page Contains    Connected
 
 Pass Tutorial
     [Tags]    Pocky
@@ -31,10 +38,6 @@ Pass Tutorial
     ...    AND    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
     Sleep    3
-
-Enter Makeup Cam
-    [Tags]    Pocky
-    Click Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
 
 Download sample photos
     [Tags]    Pocky
@@ -130,7 +133,10 @@ Click
 CheckSubscriptionAndClose
     [Tags]    Shura
     Sleep    3
+    #慢網路CASE
+    ${busy}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/busy_indicator_switcher
     ${subscriptioncheck}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/promote_background
+    Run Keyword If    ${busy} > 0    Press Keycode    4
     Run Keyword If    ${subscriptioncheck}>0    Run Keywords    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/promote_close_btn
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/promote_close_btn
 
@@ -140,7 +146,7 @@ Launcher-Click Discover button
     Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_discover
 
 Launcher-Click Home button
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
     Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
 
 Apply Color
@@ -173,6 +179,18 @@ Adjust Vertical Seekbar
 Enter Settings
     [Tags]    Ethan
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+
+Launcher-Click Photo Makeup button
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
+    Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
+
+Launcher-Click Setting button
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+
+Launcher-Click Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
+    Click Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
 
 Select PERFECT Brand
     [Tags]    Pocky
