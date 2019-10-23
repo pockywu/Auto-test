@@ -9,35 +9,38 @@ Resource          resource/YMK_Keyword.robot
 Check launcher banner AD
     [Tags]    Shura
     Pass Tutorial
+    Sleep    10
     Launcher-Click Setting button    #Click setting button
-    Press Keycode    4
-    Sleep    3
+    Press Keycode    4    #Click Back
+    Sleep    10    #讓subscription page有時間出現
     Press Keycode    4    #close subscription page
-    Sleep    3
-    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/background_native_ad_container    #AD banner
-    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Launcher Banner have AD
+    Wait Until Page Contains    com.cyberlink.youcammakeup:id/background_native_ad_container    100    #等廣告出現
+    ${count}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/background_native_ad_container    #AD banner
+    Run Keyword If    ${count} > 0    Run Keywords    Set Test Message    Launcher Banner have AD
     ...    AND    Capture Page Screenshot    LauncherBannerAD.png
     ...    ELSE    Fail    Launcher Banner no AD
 
 Check launcher AD tile
     [Tags]    Shura
-    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/native_ad_icon    #AD TILE
-    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Launcher have AD tile
+    ${count}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/native_ad_icon    #AD TILE
+    Run Keyword If    ${count} > 0    Run Keywords    Set Test Message    Launcher have AD tile
     ...    AND    Capture Page Screenshot    LauncherADtile.png
     ...    ELSE    Fail    Launcher no AD tile
 
 Check camera back AD
     Launcher-Click Makeup Cam
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/before    100
-    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
-    Sleep    3
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/effectDivider    100    #直到出現promote premium look跟look間的分隔線出現
+    Sleep    10    #在makeup cam裡等待久一點
+    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon    #點back button 回到launcher
     Launcher-Click Makeup Cam
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/before    100
-    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
-    Sleep    3
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/effectDivider    100    #直到出現promote premium look跟look間的分隔線出現
+    Sleep    10    #在makeup cam裡等待久一點
+    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon    #點back button 回到launcher
+    Sleep    10    #load廣告的時間
     ${Status}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn    #檢查有沒有看到makeup cam button
-    Run Keyword if    ${Status} == 0    Fail    No AD when back from makeup cam
-    Run Keyword if    ${Status} > 0    Run Keywords    Set Test Message    Have AD when back from makeup cam
+    ${Status2}    Run Keyword And Return Status    Page Should Contain Element    xpath=//*[contains(@resource-id, 'abgcp')]
+    Run Keyword if    ${Status2} == 0    Fail    No AD when back from makeup cam
+    Run Keyword if    ${Status2} > 0    Run Keywords    Set Test Message    Have AD when back from makeup cam
     ...    AND    Capture Page Screenshot    makeupcambackAD.PNG
     ...    AND    Press Keycode    4
 
@@ -46,9 +49,9 @@ Check launcher trending AD
     Sleep    3
     : FOR    ${i}    IN RANGE    1    20
     \    Swipe    400    1000    400    500    200
-    \    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/google_ad_panel
+    \    ${count}    Run Keyword And Return Status    Page Should not Contain Element    com.cyberlink.youcammakeup:id/google_ad_panel
     \    Run Keyword If    ${count} == 0    Exit For Loop
-    Run Keyword if    ${count} > 0    Run Keywords    FAIL    Launcher No AD
+    Run Keyword if    ${count} > 0    Run Keywo3rds    FAIL    Launcher No AD
     ...    AND    Capture Page Screenshot    1-launcherAD.png
     ${ScreenHight}    Get Window Height
     ${ScreenHight}=    Evaluate    ${ScreenHight}/2
@@ -61,10 +64,16 @@ Check launcher trending AD
 Check trending AD
     [Tags]    Shura
     Launcher-Click Discover button
+    Sleep    3
+    Click A Point    500    500
+    Sleep    3
+    Swipe    400    200    400    1000    500
+    Launcher-Click Discover button
+    Sleep    1    #讓trending page load資料一下
     : FOR    ${i}    IN RANGE    1    20
     \    Swipe    400    1000    400    450
     \    Sleep    1
-    \    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/ad_info_panel
+    \    ${count}    Run Keyword And Return Status    Page Should not Contain Element    com.cyberlink.youcammakeup:id/ad_info_panel
     \    Run Keyword If    ${count} == 0    Run Keywords    Set Test Message    Trending have AD    append=yes
     \    ...    AND    Capture Page Screenshot    2-trendingAD.png
     \    ...    AND    Exit For Loop
@@ -88,27 +97,29 @@ Check photo picker AD
 Check result page whole page AD
     [Tags]    Shura
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #選照片
+    Sleep    10
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn    #Save button
     Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn    #點save
-    Sleep    3
-    ${count}    Run Keyword And Return Status    Page Should Not Contain Element    abgcp    #0是有廣告
-    ${count2}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/sharePageHomeButton    #0是有HOME鍵
-    Run Keyword if    ${count2} > 0    Run Keywords    Set Test Message    Result page have whole page AD
-    ...    AND    Capture Page Screenshot    4-resultpagewholeAD.PNG
+    Sleep    10
+    ${count}    Run Keyword And Return Status    Page Should Contain Element    xpath=//*[contains(@resource-id, 'abgcp')]
+    Run Keyword if    ${count} > 0    Run Keywords    Set Test Message    Result page have whole page AD
     ...    AND    Press Keycode    4
-    ...    ELSE IF    ${count} == 0
-    ...    AND    ${count2} == 0    FAIL    Result page no whole page AD
-    ...    ELSE    Run Keywords    Set Test Message    Result page have whole page AD
-    ...    AND    Capture Page Screenshot    4-resultpagewholeAD.PNG
-    ...    AND    Click Element    close_button_icon
+    ...    ELSE    Fail    Result page doesn't have whole page AD
 
-TEST
-    PHOTOMAKEUP
+Check result page AD
+    Sleep    10
+    ${count}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/photo_result_page_native_ad_container    #AD banner
+    Run Keyword If    ${count} > 0    Run Keywords    Set Test Message    Result page have AD
+    ...    AND    Capture Page Screenshot    ResultpageAD.png
+    ...    ELSE    Fail    Result page no AD
+    Click Element    com.cyberlink.youcammakeup:id/sharePageHomeButton
+
+Check Back AD
 
 *** Keywords ***
 skipTutorial
     Open Application    http://localhost:4723/wd/hub    platformName=Android    platformVersion=${platformVersion}    deviceName=Android    automationName=UiAutomator2    appPackage=com.cyberlink.youcammakeup
-    ...    appActivity=activity.SplashActivity    autoGrantPermissions=${autoGrantPermissions}    noReset=FALSE
+    ...    appActivity=activity.SplashActivity    autoGrantPermissions=$S{autoGrantPermissions}    noReset=FALSE
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_login_panel
     ${loginstatus}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/getStartBtn
     Run Keyword If    ${loginstatus} == 0    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/tutorialSkipBtn
