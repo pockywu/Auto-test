@@ -99,35 +99,15 @@ Library           AppiumLibrary
     Apply Pattern
     Click    Earrings
     Apply Pattern
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn
-    Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+    Save
 
-1.1 test
-    Select Sample photo
-    Click Undo
-    Sleep    2
-    Click    Face
-    Scroll Makeup Menu
-    Scroll Makeup Menu
-    Click    Eye
-    Scroll Makeup Menu
-    Scroll Makeup Menu
-    Scroll Makeup Menu
-    Click    Hair
-    Select PERFECT Brand
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/colorContainer
-    Click Element    com.cyberlink.youcammakeup:id/colorContainer
-    Click    Hair Style
-    Apply Pattern
-    Click    Accessories
-    Apply Pattern
-    Click    Eyewear
-    Apply Pattern
-    Click    Headband
-    Apply Pattern
-    Click    Necklace
-    Apply Pattern
-    Click    Earrings
-    Apply Pattern
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn
-    Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
+1.2 Share look to BC
+    Scroll down to Find    SHARE
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/descriptionText
+    Click Element    com.cyberlink.youcammakeup:id/descriptionText
+    Log in    bb@bb.com    bbbbbb
+    Wait Until Page Does Not Contain    CANCEL    timeout=30
+
+test
+    Select Album    DCIM
+    Select photo    11

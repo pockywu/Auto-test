@@ -11,8 +11,8 @@ Resource          resource/YMK_Keyword.robot
     Enter Settings
 
 02. Camera
-    Tap Switch    Auto Save Photo
-    Tap Switch    Front Camera Mirror
-    Tap Switch    Skin Beautifier
-    Tap Switch    Countdown Sound Effect
-    Tap Switch    Face Metering
+    Click Switch    Auto Save Photo
+    Click Switch    Front Camera Mirror
+    Click Switch    Skin Beautifier
+    Click Switch    Countdown Sound Effect
+    Click Switch    Face Metering
