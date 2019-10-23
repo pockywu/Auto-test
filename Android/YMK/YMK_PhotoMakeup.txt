@@ -103,12 +103,11 @@ Library           AppiumLibrary
 
 1.2 Share look to BC
     Scroll down to Find    SHARE
-
-test
-    Select Sample photo
-    Save
-    Scroll down to Find    SHARE
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/descriptionText
     Click Element    com.cyberlink.youcammakeup:id/descriptionText
     Log in    bb@bb.com    bbbbbb
     Wait Until Page Does Not Contain    CANCEL    timeout=30
+
+test
+    Select Album    DCIM
+    Select photo    11

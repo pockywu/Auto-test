@@ -53,6 +53,7 @@ Download sample photos
 Select Album
     [Arguments]    ${folderName}
     [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
     : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
@@ -60,7 +61,6 @@ Select Album
     \    Exit For Loop If    ${count}>0
     \    Swipe    400    1000    400    300    400
     Click text    ${folderName}
-    Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo, 除了找座標，怎麼樣才能點到別張照片？
 
 Select Sample Photo
     [Tags]    Pocky
@@ -74,7 +74,7 @@ Select Sample Photo
     Click text    YouCam Makeup Sample
     ${dialog}    Run Keyword And Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    timeout=2
     Run Keyword if    ${dialog}>0    Download sample photos
-    ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo, 除了找座標，怎麼樣才能點到別張照片？
+    ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
 
 Subsribe
     [Tags]    Pocky
@@ -221,10 +221,8 @@ Scroll Makeup Menu
 
 Apply Pattern
     [Tags]    Pocky
-    #Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image    timeout=10
-    #Click Element    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
-    Sleep    10
-    Click Element    xpath=//android.widget.FrameLayout[@content-desc='pattern 3 button']
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image    timeout=10
+    Click Element    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
 
 Click Switch Button
     [Tags]    Pocky
@@ -265,5 +263,15 @@ Log in
     ...    AND    Input text    com.cyberlink.youcammakeup:id/register_password    ${password}
     ...    AND    Click Element    com.cyberlink.youcammakeup:id/register_accept_btn
 
-
-
+Select Photo
+    [Arguments]    ${number}    # 選擇第幾張照片
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/photoItemImage
+    &{element_size}=    Get Element Size    com.cyberlink.youcammakeup:id/photoItemImage
+    ${element_location}=    Get Element Location    com.cyberlink.youcammakeup:id/photoItemImage
+    ${column} =    Evaluate    (${number}%3)
+    ${column} =    Set Variable If    ${column} == 0    3    ${column}
+    ${row} =    Evaluate    math.ceil(${number}/3)    math
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * ${column}) - (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
+    Click Element At Coordinates    ${start_x}    ${start_y}
