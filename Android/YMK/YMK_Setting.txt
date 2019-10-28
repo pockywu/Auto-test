@@ -16,3 +16,4 @@ Resource          resource/YMK_Keyword.robot
     Click Switch    Skin Beautifier
     Click Switch    Countdown Sound Effect
     Click Switch    Face Metering
+    #123
