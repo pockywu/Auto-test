@@ -292,7 +292,7 @@ Randomly Swipe
     \    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     \    Exit For Loop If    ${j}==${swipe_count}
 
-Play video normally
+Randomly play video
     [Tags]    WadeCW
     #隨機點擊影片:
     ${count_video}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]    #計算影片數
@@ -301,7 +301,7 @@ Play video normally
     ${video_index}    evaluate    ${count_video} -1
     ${random_click}    evaluate    random.randint(0,${video_index})    random
     Click Element    ${var}[${random_click}]
-    Sleep    3
+    Sleep    10
     ${video_type1}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_play_icon
     Run Keyword If    '${video_type1}'=='True'    Click Element    com.cyberlink.youcammakeup:id/post_play_icon
     ...    ELSE    Run Keyword    Sleep    1

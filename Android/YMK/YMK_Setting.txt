@@ -39,9 +39,11 @@ Resource          resource/YMK_Keyword.robot
 05. Notifications and country
 
 06. About
+
+06-1.Tutorial-Play video normally
     Sleep    1
     Scroll down to Find    Tutorials
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
     Randomly Swipe    0    10    50    70    50    20
     ...    2000
-    Play video normally
+    Randomly play video
