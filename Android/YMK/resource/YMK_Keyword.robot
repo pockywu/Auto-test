@@ -176,8 +176,9 @@ Adjust Vertical Seekbar
     ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0)
     Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1500
 
-Enter Settings
+Enter Setting
     [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
 
 Launcher-Click Photo Makeup button
@@ -237,7 +238,7 @@ Click Switch
     ${screen_width}=    Get Window Width
     ${start_x}=    Evaluate    ${screen_width} * 0.9
     ${start_y}=    Evaluate    ${element_location['y']} + 10
-    Click Element At Coordinates    ${start_x}    ${start_Y}    #目前只能土法煉鋼，針對不同resolution還要再想想
+    Click Element At Coordinates    ${start_x}    ${start_Y}
 
 Scroll down to Find
     [Arguments]    ${Name}
@@ -276,6 +277,11 @@ Select Photo
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
     Click Element At Coordinates    ${start_x}    ${start_y}
 
+Back from Setting
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
+    Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
+
 Randomly Swipe
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}
     ...    ${duration}
@@ -299,5 +305,50 @@ Play video normally
     ${video_type1}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_play_icon
     Run Keyword If    '${video_type1}'=='True'    Click Element    com.cyberlink.youcammakeup:id/post_play_icon
     ...    ELSE    Run Keyword    Sleep    1
+
+Start 7-Day Free Trial
+    [Tags]    Ethan
+    ${FirstSubscribe}    Run keyword and Return Status    Wait Until Page Contains Element    com.android.vending:id/footer_placeholder
+    Run keyword If    ${FirstSubscribe} == "True"    Click Element    com.android.vending:id/footer_placeholder
+    ...    ELSE    Run keywords    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/dialogExContainer
+    ...    AND    Click Element    com.cyberlink.youcammakeup:id/dialogExContainer
     Sleep    5
-    Capture Page Screenshot    filename=Tutorialsscreenshot.png
+
+Enter Makeup Cam
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
+    Click Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
+    Sleep    3
+
+Set counting to 3 seconds
+    [Tags]    Ethan
+    #In Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/cameraMoreOptionButton
+    Click Element    com.cyberlink.youcammakeup:id/cameraMoreOptionButton
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/cameraTimerButton
+    Click Element    com.cyberlink.youcammakeup:id/cameraTimerButton
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/timer3s
+    Click Element    com.cyberlink.youcammakeup:id/timer3s
+    ${screen_height}=    Get Window Height
+    ${screen_width}=    Get Window Width
+    ${start_x}=    Evaluate    ${screen_width} * 0.5
+    ${start_y}=    Evaluate    ${screen_height} * 0.5
+    Click A Point    ${start_x}    ${start_y}
+
+Take a photo
+    [Tags]    Ethan
+    #In Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/before
+    Click Element    com.cyberlink.youcammakeup:id/before
+
+Save the photo
+    [Tags]    Ethan
+    #In Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/saveButtonImage
+    Click Element    com.cyberlink.youcammakeup:id/saveButtonImage
+
+Back from Makeup Cam
+    [Tags]    Ethan
+    #In Makeup Cam
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/cameraBackIcon
+    Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
