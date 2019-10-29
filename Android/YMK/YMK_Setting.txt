@@ -8,11 +8,28 @@ Resource          resource/YMK_Keyword.robot
 *** Test Cases ***
 01. Open Settings
     Pass Tutorial
-    Enter Settings
+    Enter Setting
 
 02. Camera
+    Back from Setting
+    Start 7-Day Free Trial
+    Enter Makeup Cam
+    Set counting to 3 seconds
+    Take a photo
+    Sleep    4
+    Save the photo
+    Back from Makeup Cam
+    Enter Setting
     Click Switch    Auto Save Photo
     Click Switch    Front Camera Mirror
     Click Switch    Skin Beautifier
     Click Switch    Countdown Sound Effect
     Click Switch    Face Metering
+    Back from Setting
+    Enter Makeup Cam
+    Take a photo
+    Sleep    4
+    Back from Makeup Cam
+    Enter Setting
+
+03. Photo
