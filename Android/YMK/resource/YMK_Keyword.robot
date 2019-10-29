@@ -277,10 +277,11 @@ Select Photo
     Click Element At Coordinates    ${start_x}    ${start_y}
 
 Randomly Swipe
-    [Arguments]    ${min_times}    ${max_times}
+    [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}
+    ...    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
-    Sleep    3
+    Sleep    1
     : FOR    ${j}    IN RANGE    0    ${swipe_count}
-    \    Swipe By Percent    50    70    50    30    2000
+    \    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     \    Exit For Loop If    ${j}==${swipe_count}
