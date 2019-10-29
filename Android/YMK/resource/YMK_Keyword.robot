@@ -285,3 +285,26 @@ Randomly Swipe
     : FOR    ${j}    IN RANGE    0    ${swipe_count}
     \    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     \    Exit For Loop If    ${j}==${swipe_count}
+
+Tutorials-Play video normally
+    [Tags]    WadeCW
+    Sleep    1
+    #向下滑點擊Tutorials
+    Scroll down to Find    Tutorials
+    #滑動螢幕(滑動次數為亂數):
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
+    Randomly Swipe    0    10    50    70    50    20
+    ...    2000
+    #隨機點擊影片:
+    ${count_video}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]    #計算影片數
+    ${count1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]
+    ${var}    Set Variable    ${count1}
+    ${video_index}    evaluate    ${count_video} -1
+    ${random_click}    evaluate    random.randint(0,${video_index})    random
+    Click Element    ${var}[${random_click}]
+    Sleep    3
+    ${video_type1}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_play_icon
+    Run Keyword If    '${video_type1}'=='True'    Click Element    com.cyberlink.youcammakeup:id/post_play_icon
+    ...    ELSE    Run Keyword    Sleep    1
+    Sleep    5
+    Capture Page Screenshot    filename=Tutorialsscreenshot.png
