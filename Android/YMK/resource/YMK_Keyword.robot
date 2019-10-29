@@ -353,7 +353,8 @@ Back from Makeup Cam
     #In Makeup Cam
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/cameraBackIcon
     Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
-    Natural Looks
+
+Natural Looks
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
     Click Element    com.cyberlink.youcammakeup:id/launcherExtra
     Wait Until Page Contains Element
