@@ -294,17 +294,18 @@ Randomly Swipe
 
 Randomly play video
     [Tags]    WadeCW
-    #隨機點擊影片:
     ${count_video}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]    #計算影片數
     ${count1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]
     ${var}    Set Variable    ${count1}
     ${video_index}    evaluate    ${count_video} -1
     ${random_click}    evaluate    random.randint(0,${video_index})    random
     Click Element    ${var}[${random_click}]
-    Sleep    10
+    Sleep    1
     ${video_type1}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_play_icon
     Run Keyword If    '${video_type1}'=='True'    Click Element    com.cyberlink.youcammakeup:id/post_play_icon
     ...    ELSE    Run Keyword    Sleep    1
+    Sleep    10
+    Capture Page Screenshot    filename=Tutorialsscreenshot.png
 
 Start 7-Day Free Trial
     [Tags]    Ethan
@@ -352,7 +353,6 @@ Back from Makeup Cam
     #In Makeup Cam
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/cameraBackIcon
     Click Element    com.cyberlink.youcammakeup:id/cameraBackIcon
-    
     Natural Looks
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
     Click Element    com.cyberlink.youcammakeup:id/launcherExtra
@@ -391,7 +391,6 @@ Costume Looks
     Click Element    com.android.packageinstaller:id/permission_allow_button
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/focusAreaView
     Click Element    com.cyberlink.youcammakeup:id/cameraBackButton
-
 
 Eyeshadow
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
@@ -498,6 +497,7 @@ Headband
     Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/focusAreaView
     Click Element    com.cyberlink.youcammakeup:id/cameraBackButton
+
 Accessories
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/banner_image
     Click Element    com.cyberlink.youcammakeup:id/launcherExtra
@@ -512,4 +512,3 @@ Accessories
     Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/focusAreaView
     Click Element    com.cyberlink.youcammakeup:id/cameraBackButton
-
