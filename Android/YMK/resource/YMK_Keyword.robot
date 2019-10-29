@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        True    #True: don't reset when open app. False: reset when open app
+${noReset}        False    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -275,3 +275,12 @@ Select Photo
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * ${column}) - (${element_size['width']} * 0.5)
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
     Click Element At Coordinates    ${start_x}    ${start_y}
+
+Randomly Swipe
+    [Arguments]    ${min_times}    ${max_times}
+    [Tags]    WadeCW
+    ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
+    Sleep    3
+    : FOR    ${j}    IN RANGE    0    ${swipe_count}
+    \    Swipe By Percent    50    70    50    30    2000
+    \    Exit For Loop If    ${j}==${swipe_count}
