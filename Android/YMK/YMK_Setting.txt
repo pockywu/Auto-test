@@ -40,9 +40,7 @@ Resource          resource/YMK_Keyword.robot
 
 06. About
     Sleep    1
-    #向下滑點擊Tutorials
     Scroll down to Find    Tutorials
-    #滑動螢幕(滑動次數為亂數):
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
     Randomly Swipe    0    10    50    70    50    20
     ...    2000
