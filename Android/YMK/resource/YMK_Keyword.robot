@@ -256,6 +256,17 @@ Scroll down to Find
     \    Swipe    400    1000    400    300    400
     Click text    ${Name}
 
+Scroll down to Find specified button
+    [Arguments]    ${resource-id}    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}
+    ...    ${end_y}    ${duration}
+    [Tags]    WadeCW
+    Sleep    1
+    : FOR    ${i}    IN RANGE    ${min_times}    ${max_times}    #向下划直到找到resource-id
+    \    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    \    ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
+    \    Exit For Loop If    ${count}>0
+    Click Element    ${resource-id}
+
 Save
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn    timeout=30
