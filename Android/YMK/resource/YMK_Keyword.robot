@@ -240,6 +240,12 @@ Click Switch
     ${start_y}=    Evaluate    ${element_location['y']} + 10
     Click Element At Coordinates    ${start_x}    ${start_Y}
 
+Click on the specified button
+    [Arguments]    ${resource-id}    ${index}
+    [Tags]    WadeCW
+    ${element}    Get Webelements    //*[contains(@resource-id,'${resource-id}')]
+    Click Element    ${element}[${index}]
+
 Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
