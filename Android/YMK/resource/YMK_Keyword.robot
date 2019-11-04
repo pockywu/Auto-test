@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    8
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        False    #True: don't reset when open app. False: reset when open app
+${noReset}        True    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -66,7 +66,7 @@ Select Sample Photo
     [Tags]    Pocky
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
-    Sleep    2
+    Sleep    3
     : FOR    ${i}    IN RANGE    1    20
     \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
     \    Exit For Loop If    ${count}>0
@@ -75,6 +75,7 @@ Select Sample Photo
     ${dialog}    Run Keyword And Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    timeout=2
     Run Keyword if    ${dialog}>0    Download sample photos
     ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
+    Sleep    3
 
 Subsribe
     [Tags]    Pocky
@@ -150,13 +151,16 @@ Launcher-Click Home button
     Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
 
 Apply Color
+    [Arguments]    ${order}    # 0: 第一個 1: 第二個
     [Tags]    Pocky
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/colorItemColorTexture    timeout=10
-    Click Element    com.cyberlink.youcammakeup:id/colorItemColorTexture
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/colorItemColorTexture    timeout=10
+    @{element}    Get Webelements    com.cyberlink.youcammakeup:id/colorItemColorTexture
+    Sleep    1
+    Click Element    @{element}[${order}]
 
 Adjust Horizontal Seekbar
     [Tags]    Pocky
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/unitSeekBar
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/unitSeekBar    timeout=10
     ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0)
@@ -167,7 +171,7 @@ Adjust Horizontal Seekbar
 
 Adjust Vertical Seekbar
     [Tags]    Pocky
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/unitSeekBar
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/unitSeekBar    timeout=10
     ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/unitSeekBar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
@@ -211,7 +215,7 @@ Select PERFECT Brand
 
 Scroll Makeup Menu
     [Tags]    Pocky
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar    timeout=10
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar    timeout=20
     ${element_size}=    Get Element Size    id=com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
     ${element_location}=    Get Element Location    id=com.cyberlink.youcammakeup:id/makeupMenuBottomToolbar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.8)
@@ -221,9 +225,12 @@ Scroll Makeup Menu
     Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    1000
 
 Apply Pattern
+    [Arguments]    ${order}    # 0: 第一個 1: 第二個
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image    timeout=10
-    Click Element    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
+    @{element}    Get Webelements    com.cyberlink.youcammakeup:id/panel_beautify_template_button_image
+    Sleep    1
+    Click Element    @{element}[${order}]
 
 Click Switch Button
     [Tags]    Pocky
@@ -270,6 +277,7 @@ Scroll down to Find specified button
 Save
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn    timeout=30
+    Sleep    5
     Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
 
 Log in
