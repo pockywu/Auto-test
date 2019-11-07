@@ -33,6 +33,42 @@ Resource          resource/YMK_Keyword.robot
     Enter Setting
 
 03. Photo
+    Click Quality
+    Choose Quality    Ultra High
+    Back from Setting
+    Launcher-Click Photo Makeup button
+    Click    YouCam Makeup
+    Select the first photo
+    Click    Save
+    Back from Result page
+    Enter Setting
+    Click Quality
+    Choose Quality    Ultra High
+    Back from Setting
+    Launcher-Click Photo Makeup button
+    Click    YouCam Makeup
+    Select the first photo
+    Click    Save
+    Back from Result page
+    Enter Setting
+    Click Quality
+    Choose Quality    High
+    Back from Setting
+    Launcher-Click Photo Makeup button
+    Click    YouCam Makeup
+    Select the first photo
+    Click    Save
+    Back from Result page
+    Enter Setting
+    Click Quality
+    Choose Quality    Normal
+    Back from Setting
+    Launcher-Click Photo Makeup button
+    Click    YouCam Makeup
+    Select the first photo
+    Click    Save
+    Back from Result page
+    Enter Setting
 
 04. Video
 

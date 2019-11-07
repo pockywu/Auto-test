@@ -182,7 +182,7 @@ Adjust Vertical Seekbar
 
 Enter Setting
     [Tags]    Ethan
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherSettingButton
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
 
 Launcher-Click Photo Makeup button
@@ -538,3 +538,34 @@ Accessories
     Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/focusAreaView
     Click Element    com.cyberlink.youcammakeup:id/cameraBackButton
+
+Select the first photo
+    [Tags]    Ethan
+    #On Photo picker
+    Sleep    5
+    ${screen_width}=    Get Window Width
+    ${screen_Height}=    Get Window Height
+    ${start_x}=    Evaluate    ${screen_width} * 0.3
+    ${start_y}=    Evaluate    ${screen_Height} * 0.2
+    Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Back from Result page
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageHomeButton
+    Click Element    com.cyberlink.youcammakeup:id/sharePageHomeButton
+
+Click Quality
+    [Tags]    Ethan
+    #On Setting
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/photoQualityRowBtn
+    Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
+
+Choose Quality
+    [Arguments]    ${Settings_catrgory}
+    [Tags]    Ethan
+    #On Setting - Photo Quality
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
+    ${screen_width}=    Get Window Width
+    ${start_x}=    Evaluate    ${screen_width} * 0.9
+    ${start_y}=    Evaluate    ${element_location['y']}
+    Click Element At Coordinates    ${start_x}    ${start_Y}
