@@ -83,3 +83,86 @@ Resource          resource/YMK_Keyword.robot
     Randomly Swipe    0    10    50    70    50    20
     ...    2000
     Randomly play video
+    [Teardown]    Relaunch APP and go to setting
+
+06-2. Rate us-Go to Google/Apple store
+    Sleep    1
+    Scroll down to Find    Rate us
+    Wait Until Page Contains Element    vivo:id/text1
+    Click Element    vivo:id/text1
+    Sleep    5
+    Capture Page Screenshot    filename=Rateusscreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-3. Follow Us-Go FB page
+    Sleep    1
+    Scroll down to Find    Follow Us
+    Sleep    5
+    Capture Page Screenshot    filename=Followusscreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-4. FAQ & Send Feedback-Show FAQ page
+    Sleep    1
+    Scroll down to Find    FAQ & Send Feedback
+    Sleep    20
+    Wait Until Page Contains    Send feedback
+    Capture Page Screenshot    filename=ShowFAQpagescreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-5. FAQ & Send Feedback-Check if user feedback can be sent to server
+    Sleep    1
+    Scroll down to Find    FAQ & Send Feedback
+    Sleep    20
+    Wait Until Page Contains    Send feedback
+    Click Text    Send feedback
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/edit_feedback_text
+    Input Text    com.cyberlink.youcammakeup:id/edit_feedback_text    QA Test    #輸入QA TEST
+    Input Text    com.cyberlink.youcammakeup:id/edit_feedback_email    WadeCW_Lee@PerfectCorp.com    #輸入E-mail
+    Click Element    com.cyberlink.youcammakeup:id/btn_agree_continue    #點選交出
+    Sleep    5
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #點選OK
+    [Teardown]    Relaunch APP and go to setting
+
+06-6. About-Current Version
+    Sleep    1
+    Scroll down to Find    About
+    Sleep    1
+    Capture Page Screenshot    filename=CurrentVersionscreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-7. About-Latest Version
+    Sleep    1
+    Scroll down to Find    About
+    Sleep    1
+    Click Text    Latest Version
+    Sleep    1
+    Capture Page Screenshot    filename=LatestVersionscreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-8. About-Legal Notice
+    Sleep    1
+    Scroll down to Find    About
+    Sleep    1
+    Click Text    Legal Notice
+    Sleep    1
+    Capture Page Screenshot    filename=LegalNoticescreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-9. Abour-Terms of Service
+    Sleep    1
+    Scroll down to Find    About
+    Sleep    1
+    Click Text    Terms of Service
+    Sleep    1
+    Capture Page Screenshot    filename=TermsofServicescreenshot.png
+    [Teardown]    Relaunch APP and go to setting
+
+06-10. About-Privacy Policy
+    Sleep    1
+    Scroll down to Find    About
+    Sleep    1
+    Click Text    Privacy Policy
+    Sleep    1
+    Capture Page Screenshot    filename=PrivacyPolicyscreenshot.png
+    [Teardown]    Relaunch APP and go to setting
