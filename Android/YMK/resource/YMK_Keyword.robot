@@ -569,3 +569,10 @@ Choose Quality
     ${start_x}=    Evaluate    ${screen_width} * 0.9
     ${start_y}=    Evaluate    ${element_location['y']}
     Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Relaunch APP and go to setting
+    [Tags]    WadeCW
+    Close Application
+    Open App
+    Pass Tutorial
+    Enter Setting
