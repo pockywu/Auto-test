@@ -561,14 +561,15 @@ Click Quality
     Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
 
 Choose Quality
-    [Arguments]    ${Settings_catrgory}
+    [Arguments]    ${Quality_catrgory}
     [Tags]    Ethan
     #On Setting - Photo Quality
-    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
+    Sleep    3
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Quality_catrgory}']
     ${screen_width}=    Get Window Width
-    ${start_x}=    Evaluate    ${screen_width} * 0.9
-    ${start_y}=    Evaluate    ${element_location['y']}
-    Click Element At Coordinates    ${start_x}    ${start_Y}
+    ${start_x}=    Evaluate    ${screen_width} * 0.7
+    ${start_y}=    Evaluate    ${element_location['y']} * 1
+    Click A Point    ${start_x}    ${start_Y}
 
 Relaunch APP and go to setting
     [Tags]    WadeCW
@@ -576,3 +577,8 @@ Relaunch APP and go to setting
     Open App
     Pass Tutorial
     Enter Setting
+
+Back from Quality
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
