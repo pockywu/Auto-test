@@ -13,11 +13,10 @@ Library           AppiumLibrary
     [Tags]    Pocky
     Set photo quality    Smart HD
 
-1.1 Apply all effects and Save
+1.1 Apply all Perfect effects and Save
     [Tags]    Pocky
     Select Sample photo
-    Click Undo
-    Sleep    2
+    Sleep    3
     Click    Mouth
     Select PERFECT Brand
     Apply Color    1
@@ -110,6 +109,7 @@ Library           AppiumLibrary
     Save
 
 1.2 Share look to BC
+    Close Rating Dialog
     Scroll down to Find    SHARE
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/descriptionText
     Click Element    com.cyberlink.youcammakeup:id/descriptionText
@@ -119,6 +119,7 @@ Library           AppiumLibrary
 1.3 Share photo to Facebook
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click    Facebook
@@ -128,6 +129,7 @@ Library           AppiumLibrary
 1.4 Share photo to Instagram
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click    Instagram
@@ -140,6 +142,7 @@ Library           AppiumLibrary
 1.5 Share photo to WeChat
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click    WeChat
@@ -152,6 +155,7 @@ Library           AppiumLibrary
 1.6 Share photo to WeChat Moments
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click    WeChat Moments
@@ -161,6 +165,7 @@ Library           AppiumLibrary
 1.7 Share photo to BC post
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click    YouCam Community
@@ -173,6 +178,7 @@ Library           AppiumLibrary
 1.8 Share photo to BC Message
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click    YouCam Community
@@ -184,35 +190,27 @@ Library           AppiumLibrary
 1.9 Share photo to Weibo
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
     Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
-    : FOR    ${i}    IN RANGE    1    20
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'New Weibo')]
-    \    Exit For Loop If    ${count}>0
-    \    Swipe    400    1000    400    300    400
-    Click text    New Weibo
+    Scroll down to find    New Weibo
     Wait Until Element Is Visible    com.sina.weibo:id/titleSave
     Click Element    com.sina.weibo:id/titleSave
 
 1.10 Share photo to Twitter
     Select Sample photo
     Save
+    Close Rating Dialog
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/sharePageContinueEditing
-    Click Element    com.cyberlink.youcammakeup:id/sharePageContinueEditing
-    : FOR    ${i}    IN RANGE    1    20
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Tweet')]
-    \    Exit For Loop If    ${count}>0
-    \    Swipe    400    1000    400    300    400
-    Click text    Tweet
+    Scroll down to find    Tweet
     Wait Until Element Is Visible    com.twitter.android:id/button_tweet
     Click Element    com.twitter.android:id/button_tweet
 
-test
+1.11 Share photo to Collage
     Select Sample photo
-    Click Undo
-    Sleep    2
-    Scroll Makeup Menu
-    Scroll Makeup Menu
-    Click    Hair
-    Click    Hair Style
-    Apply Pattern    2
+    Save
+    Close Rating Dialog
+    Scroll down to find    MORE
+    Click    SAVE
+
+test

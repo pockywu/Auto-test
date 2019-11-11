@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8.1.0
+${platformVersion}    8
 ${deviceName}     Android
 ${automationName}    uiautomator2
 ${appPackage}     com.cyberlink.youcammakeup
@@ -237,4 +237,3 @@ Accessories
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
     Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
     Click Element    com.cyberlink.youcammakeup:id/topToolBarBackBtnContainer
-

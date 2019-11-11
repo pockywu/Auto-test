@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    8
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        False    #True: don't reset when open app. False: reset when open app
+${noReset}        True    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -256,7 +256,6 @@ Click on the specified button
 Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
-    Sleep    2
     : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
     \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
     \    Exit For Loop If    ${count}>0
@@ -277,7 +276,7 @@ Scroll down to Find specified button
 Save
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn    timeout=30
-    Sleep    5
+    Sleep    2
     Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
 
 Log in
@@ -576,3 +575,8 @@ Relaunch APP and go to setting
     Open App
     Pass Tutorial
     Enter Setting
+
+Close Rating Dialog
+    [Tags]    Pocky
+    ${card_show}=    Run keyword and return status    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/MessageDialogBackground
+    Run Keyword If    ${card_show}>0    Press Keycode    4
