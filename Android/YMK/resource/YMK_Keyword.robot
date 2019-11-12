@@ -241,6 +241,7 @@ Click Switch
     [Arguments]    ${Settings_catrgory}
     [Tags]    Ethan
     #On Launcher Setting
+    Sleep    1
     ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
     ${screen_width}=    Get Window Width
     ${start_x}=    Evaluate    ${screen_width} * 0.9
@@ -582,3 +583,19 @@ Back from Quality
     [Tags]    Ethan
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
     Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
+
+Subscribe Now
+    [Tags]    Ethan
+    #IAP page
+    Sleep    3
+    ${screen_width}=    Get Window Width
+    ${screen_height}=    Get Window Height
+    ${start_x}=    Evaluate    ${screen_width} * 0.5
+    ${start_y}=    Evaluate    ${screen_height} * 0.55
+    Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Click Back up to Cloud
+    [Tags]    Ethan
+    #On Setting
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+    Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn

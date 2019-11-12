@@ -32,10 +32,9 @@ Resource          resource/YMK_Keyword.robot
     Back from Makeup Cam
     Enter Setting
 
-03. Photo
+03-1. Photo-Quality
     Back from Setting
-    Sleep    3
-    Click Element At Coordinates    500    1300
+    Subscribe Now
     Enter Setting
     Click Quality
     Choose Quality    Smart HD PRO
@@ -79,6 +78,10 @@ Resource          resource/YMK_Keyword.robot
     Click    Save
     Back from Result page
     Enter Setting
+
+03-2. Photo-Back up to cloud
+    Click Back up to Cloud
+    Click Switch    Photo backup
 
 04. Video
 
