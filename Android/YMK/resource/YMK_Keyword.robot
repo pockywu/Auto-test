@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    7
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
@@ -76,15 +76,14 @@ Select Sample Photo
     Run Keyword if    ${dialog}>0    Download sample photos
     ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
 
-Subsribe
+Subscribe
     [Tags]    Pocky
-    Wait Until Page Contains    7-DAY FREE TRIAL    timeout=10
-    Click Text    7-DAY FREE TRIAL
-    Wait Until Page Contains Element    com.android.vending:id/footer_placeholder
-    Click Element    com.android.vending:id/footer_placeholder
-    Wait Until Page Contains Element    com.android.vending:id/input
-    Input Password    com.android.vending:id/input    Pft24725102
-    Press Keycode    66    #66 is enter key
+    Click button    //*[@resource-id="root"]/android.view.View[1]/android.view.View[1]/android.view.View[7]/android.view.View[1]/android.widget.Button[1]
+    Sleep    3
+    Click button    com.android.vending:id/footer_placeholder    #按"SUBSCRIBE" button
+    ${status}    Run Keyword And Return Status    Wait Until Page Contains Element    com.android.vending:id/input    5
+    Run keyword if    ${status} > 0    Run Keywords    Input Password    com.android.vending:id/input    Pft24725102
+    ...    AND    Press Keycode    66    #66 is enter key
 
 Set photo quality
     [Arguments]    ${quality}
@@ -275,3 +274,9 @@ Select Photo
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * ${column}) - (${element_size['width']} * 0.5)
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
     Click Element At Coordinates    ${start_x}    ${start_y}
+
+Click button
+    [Arguments]    ${element name}
+    [Tags]    Shura
+    Wait Until Element Is Visible    ${element name}    timeout=30
+    Click Element    ${element name}
