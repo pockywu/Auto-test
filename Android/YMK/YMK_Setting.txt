@@ -33,43 +33,56 @@ Resource          resource/YMK_Keyword.robot
     Back from Makeup Cam
     Enter Setting
 
-03. Photo
+03-1. Photo-Quality
+    Back from Setting
+    Subscribe Now
+    Enter Setting
     Click Quality
-    Choose Quality    Ultra High
+    Choose Quality    Smart HD PRO
+    Back from Quality
     Back from Setting
     Launcher-Click Photo Makeup button
-    Click    YouCam Makeup
+    Click    Camera
     Select the first photo
     Click    Save
     Back from Result page
     Enter Setting
     Click Quality
     Choose Quality    Ultra High
+    Back from Quality
     Back from Setting
     Launcher-Click Photo Makeup button
-    Click    YouCam Makeup
+    Click    Camera
     Select the first photo
     Click    Save
     Back from Result page
     Enter Setting
     Click Quality
     Choose Quality    High
+    Back from Quality
     Back from Setting
     Launcher-Click Photo Makeup button
-    Click    YouCam Makeup
+    Click    Camera
     Select the first photo
     Click    Save
+    Sleep    3
+    Press Keycode    4
     Back from Result page
     Enter Setting
     Click Quality
     Choose Quality    Normal
+    Back from Quality
     Back from Setting
     Launcher-Click Photo Makeup button
-    Click    YouCam Makeup
+    Click    Camera
     Select the first photo
     Click    Save
     Back from Result page
     Enter Setting
+
+03-2. Photo-Back up to cloud
+    Click Back up to Cloud
+    Click Switch    Photo backup
 
 04. Video
 

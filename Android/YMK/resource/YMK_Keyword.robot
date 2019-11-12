@@ -88,15 +88,14 @@ Select Sample Photo
     ...    ELSE    Click Element    com.cyberlink.youcammakeup:id/photoItemImage
     Sleep    3
 
-Subsribe
+Subscribe
     [Tags]    Pocky
-    Wait Until Page Contains    7-DAY FREE TRIAL    timeout=10
-    Click Text    7-DAY FREE TRIAL
-    Wait Until Page Contains Element    com.android.vending:id/footer_placeholder
-    Click Element    com.android.vending:id/footer_placeholder
-    Wait Until Page Contains Element    com.android.vending:id/input
-    Input Password    com.android.vending:id/input    Pft24725102
-    Press Keycode    66    #66 is enter key
+    Click button    //*[@resource-id="root"]/android.view.View[1]/android.view.View[1]/android.view.View[7]/android.view.View[1]/android.widget.Button[1]
+    Sleep    3
+    Click button    com.android.vending:id/footer_placeholder    #按"SUBSCRIBE" button
+    ${status}    Run Keyword And Return Status    Wait Until Page Contains Element    com.android.vending:id/input    5
+    Run keyword if    ${status} > 0    Run Keywords    Input Password    com.android.vending:id/input    Pft24725102
+    ...    AND    Press Keycode    66    #66 is enter key
 
 Set photo quality
     [Arguments]    ${quality}
@@ -252,6 +251,7 @@ Click Switch
     [Arguments]    ${Settings_catrgory}
     [Tags]    Ethan
     #On Launcher Setting
+    Sleep    1
     ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
     ${screen_width}=    Get Window Width
     ${start_x}=    Evaluate    ${screen_width} * 0.9
@@ -312,6 +312,13 @@ Select Photo
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * ${column}) - (${element_size['width']} * 0.5)
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
     Click Element At Coordinates    ${start_x}    ${start_y}
+
+
+Click button
+    [Arguments]    ${element name}
+    [Tags]    Shura
+    Wait Until Element Is Visible    ${element name}    timeout=30
+    Click Element    ${element name}
 
 Back from Setting
     [Tags]    Ethan
@@ -585,14 +592,15 @@ Click Quality
     Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
 
 Choose Quality
-    [Arguments]    ${Settings_catrgory}
+    [Arguments]    ${Quality_catrgory}
     [Tags]    Ethan
     #On Setting - Photo Quality
-    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
+    Sleep    3
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Quality_catrgory}']
     ${screen_width}=    Get Window Width
-    ${start_x}=    Evaluate    ${screen_width} * 0.9
-    ${start_y}=    Evaluate    ${element_location['y']}
-    Click Element At Coordinates    ${start_x}    ${start_Y}
+    ${start_x}=    Evaluate    ${screen_width} * 0.7
+    ${start_y}=    Evaluate    ${element_location['y']} * 1
+    Click A Point    ${start_x}    ${start_Y}
 
 Relaunch APP and go to setting
     [Tags]    WadeCW
@@ -600,3 +608,27 @@ Relaunch APP and go to setting
     Open App
     Pass Tutorial
     Enter Setting
+
+Back from Quality
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
+
+<<<<<<< HEAD
+Subscribe Now
+    [Tags]    Ethan
+    #IAP page
+    Sleep    3
+    ${screen_width}=    Get Window Width
+    ${screen_height}=    Get Window Height
+    ${start_x}=    Evaluate    ${screen_width} * 0.5
+    ${start_y}=    Evaluate    ${screen_height} * 0.55
+    Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Click Back up to Cloud
+    [Tags]    Ethan
+    #On Setting
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+    Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+=======
+>>>>>>> 3ac8f862c6c596d4d612d43239177b8fbf170d08
