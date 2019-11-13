@@ -1,5 +1,6 @@
 *** Settings ***
-Suite Setup       Open App
+Test Setup        Open Setting
+Test Teardown     Close App
 Library           AppiumLibrary
 Resource          resource/YMK_Keyword.robot
 
@@ -10,7 +11,7 @@ Resource          resource/YMK_Keyword.robot
     Pass Tutorial
     Enter Setting
 
-02. Camera and GPS
+02. Camera
     Back from Setting
     Start 7-Day Free Trial
     Enter Makeup Cam
@@ -25,7 +26,6 @@ Resource          resource/YMK_Keyword.robot
     Click Switch    Skin Beautifier
     Click Switch    Countdown Sound Effect
     Click Switch    Face Metering
-    Click Switch    Access GPS Location
     Back from Setting
     Enter Makeup Cam
     Take a photo
@@ -80,43 +80,31 @@ Resource          resource/YMK_Keyword.robot
     Back from Result page
     Enter Setting
 
-03-2. Photo-Back up to cloud and Watermark
+03-2. Photo-Back up to cloud
     Click Back up to Cloud
     Click Switch    Photo backup
-    Log in    ethan1@a.com    aaaaaa
-    Click Switch    Video backup
-    Back from Back up to Cloud
-    Click Switch    Photo Watermark
-    Scroll down to Find    Video Watermark
-    Click Switch    Video Watermark
-    Back from Setting
-    Enter Makeup Cam
-    Take a photo
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
-    Click Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/before
-    Click Element    com.cyberlink.youcammakeup:id/before
-    Sleep    3
-    Click Element At Coordinates    500    1900
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoSaveButton
-    Click Element    com.cyberlink.youcammakeup:id/videoSaveButton
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/homeButton
-    Click Element    com.cyberlink.youcammakeup:id/homeButton
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
-    Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
-    Sleep    5
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
-    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
-    Enter Setting
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoAutoPlayBtn
-    Click Element    com.cyberlink.youcammakeup:id/videoAutoPlayBtn
 
 04. Video
-    Scroll down to Find    Autoplay
 
-05. Notifications and country
+05-1. Push Notifications-Push Notifications (Include BC setting)
 
-06. About
+05-2. Event & Version Updates-Show Event & Version Update notice
+    [Tags]    WadeCW    #Not finish
+    Sleep    1
+    Scroll down to Find    Events & Version Updates
+    Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
+    Randomly Swipe    0    20    50    70    50    55
+    ...    2000
+    Randomly choose Notice
+    Swipe By Percent    50    60    50    50    2000
+
+05-3. Country-Check BC post and sku data are correct after swithching country
+    [Tags]    WadeCW    #Not finish
+    Sleep    1
+    Scroll down to Find    Country/Region
+    Randomly Swipe    0    30    50    80    50    20
+    ...    2000
+    Randomly switch Country/Region
 
 06-1.Tutorial-Play video normally
     [Tags]    WadeCW
@@ -126,7 +114,6 @@ Resource          resource/YMK_Keyword.robot
     Randomly Swipe    0    10    50    70    50    20
     ...    2000
     Randomly play video
-    [Teardown]    Relaunch APP and go to setting
 
 06-2. Rate us-Go to Google/Apple store
     [Tags]    WadeCW
@@ -136,7 +123,6 @@ Resource          resource/YMK_Keyword.robot
     Click Element    vivo:id/text1
     Sleep    5
     Capture Page Screenshot    filename=Rateusscreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-3. Follow Us-Go FB page
     [Tags]    WadeCW
@@ -144,7 +130,6 @@ Resource          resource/YMK_Keyword.robot
     Scroll down to Find    Follow Us
     Sleep    5
     Capture Page Screenshot    filename=Followusscreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-4. FAQ & Send Feedback-Show FAQ page
     [Tags]    WadeCW
@@ -153,7 +138,6 @@ Resource          resource/YMK_Keyword.robot
     Sleep    20
     Wait Until Page Contains    Send feedback
     Capture Page Screenshot    filename=ShowFAQpagescreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-5. FAQ & Send Feedback-Check if user feedback can be sent to server
     [Tags]    WadeCW
@@ -169,7 +153,6 @@ Resource          resource/YMK_Keyword.robot
     Sleep    5
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #點選OK
-    [Teardown]    Relaunch APP and go to setting
 
 06-6. About-Current Version
     [Tags]    WadeCW
@@ -177,7 +160,6 @@ Resource          resource/YMK_Keyword.robot
     Scroll down to Find    About
     Sleep    1
     Capture Page Screenshot    filename=CurrentVersionscreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-7. About-Latest Version
     [Tags]    WadeCW
@@ -187,7 +169,6 @@ Resource          resource/YMK_Keyword.robot
     Click Text    Latest Version
     Sleep    1
     Capture Page Screenshot    filename=LatestVersionscreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-8. About-Legal Notice
     [Tags]    WadeCW
@@ -197,7 +178,6 @@ Resource          resource/YMK_Keyword.robot
     Click Text    Legal Notice
     Sleep    1
     Capture Page Screenshot    filename=LegalNoticescreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-9. Abour-Terms of Service
     [Tags]    WadeCW
@@ -207,7 +187,6 @@ Resource          resource/YMK_Keyword.robot
     Click Text    Terms of Service
     Sleep    1
     Capture Page Screenshot    filename=TermsofServicescreenshot.png
-    [Teardown]    Relaunch APP and go to setting
 
 06-10. About-Privacy Policy
     [Tags]    WadeCW
@@ -217,4 +196,3 @@ Resource          resource/YMK_Keyword.robot
     Click Text    Privacy Policy
     Sleep    1
     Capture Page Screenshot    filename=PrivacyPolicyscreenshot.png
-    [Teardown]    Relaunch APP and go to setting

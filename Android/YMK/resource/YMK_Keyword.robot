@@ -30,6 +30,17 @@ Open VPN
     Click Text    Brazil
     Wait Until Page Contains    Connected
 
+Open Setting
+    [Tags]    WadeCW
+    Open App
+    Pass Tutorial
+    Enter Setting
+
+Close App
+    [Tags]    WadeCW
+    Close Application
+    Log    already close app
+
 Pass Tutorial
     [Tags]    Pocky
     ${buttonShow}    Run keyword and Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/getStartBtn
@@ -326,17 +337,39 @@ Randomly Swipe
 Randomly play video
     [Tags]    WadeCW
     ${count_video}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]    #計算影片數
-    ${count1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]
-    ${var}    Set Variable    ${count1}
+    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]
     ${video_index}    evaluate    ${count_video} -1
     ${random_click}    evaluate    random.randint(0,${video_index})    random
-    Click Element    ${var}[${random_click}]
+    Click Element    ${count}[${random_click}]
     Sleep    1
     ${video_type1}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_play_icon
     Run Keyword If    '${video_type1}'=='True'    Click Element    com.cyberlink.youcammakeup:id/post_play_icon
-    ...    ELSE    Run Keyword    Sleep    1
+    ...    ELSE    Run Keyword    No Operation
     Sleep    10
     Capture Page Screenshot    filename=Tutorialsscreenshot.png
+
+Randomly choose Notice
+    [Tags]    WadeCW
+    ${count_notice}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/NoticeItemArrowDown')]    #計算Notice數
+    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/NoticeItemArrowDown')]
+    ${notice_index}    evaluate    ${count_notice} -1
+    ${random_click}    evaluate    random.randint(0,${notice_index})    random
+    Click Element    ${count}[${random_click}]
+    Sleep    5
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50
+    ...    50    2000
+    Sleep    10
+
+Randomly switch Country/Region
+    [Tags]    WadeCW
+    ${count_country}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]    #計算Country數
+    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]
+    ${country_index}    evaluate    ${count_country} -1
+    ${random_click}    evaluate    random.randint(0,${country_index})    random
+    Click Element    ${count}[${random_click}]
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Sleep    5
 
 Start 7-Day Free Trial
     [Tags]    Ethan
@@ -577,13 +610,6 @@ Choose Quality
     ${start_y}=    Evaluate    ${element_location['y']} * 1
     Click A Point    ${start_x}    ${start_Y}
 
-Relaunch APP and go to setting
-    [Tags]    WadeCW
-    Close Application
-    Open App
-    Pass Tutorial
-    Enter Setting
-
 Back from Quality
     [Tags]    Ethan
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
@@ -604,8 +630,3 @@ Click Back up to Cloud
     #On Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
     Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
-
-Back from Back up to Cloud
-    [Tags]    Ethan
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/top_bar_btn_back
-    Click Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
