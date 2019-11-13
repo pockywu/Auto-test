@@ -1,5 +1,5 @@
 *** Settings ***
-Test Setup        Open Settings
+Test Setup        Open Setting
 Test Teardown     Close App
 Library           AppiumLibrary
 Resource          resource/YMK_Keyword.robot
@@ -89,8 +89,22 @@ Resource          resource/YMK_Keyword.robot
 05-1. Push Notifications-Push Notifications (Include BC setting)
 
 05-2. Event & Version Updates-Show Event & Version Update notice
+    [Tags]    WadeCW    #Not finish
+    Sleep    1
+    Scroll down to Find    Events & Version Updates
+    Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
+    Randomly Swipe    0    20    50    70    50    55
+    ...    2000
+    Randomly choose Notice
+    Swipe By Percent    50    60    50    50    2000
 
 05-3. Country-Check BC post and sku data are correct after swithching country
+    [Tags]    WadeCW    #Not finish
+    Sleep    1
+    Scroll down to Find    Country/Region
+    Randomly Swipe    0    30    50    80    50    20
+    ...    2000
+    Randomly switch Country/Region
 
 06-1.Tutorial-Play video normally
     [Tags]    WadeCW

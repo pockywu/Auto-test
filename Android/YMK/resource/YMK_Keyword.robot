@@ -30,7 +30,7 @@ Open VPN
     Click Text    Brazil
     Wait Until Page Contains    Connected
 
-Open Settings
+Open Setting
     [Tags]    WadeCW
     Open App
     Pass Tutorial
@@ -313,7 +313,6 @@ Select Photo
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
     Click Element At Coordinates    ${start_x}    ${start_y}
 
-
 Click button
     [Arguments]    ${element name}
     [Tags]    Shura
@@ -357,11 +356,20 @@ Randomly choose Notice
     ${random_click}    evaluate    random.randint(0,${notice_index})    random
     Click Element    ${count}[${random_click}]
     Sleep    5
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    55    50
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50
     ...    50    2000
+    Sleep    10
+
+Randomly switch Country/Region
+    [Tags]    WadeCW
+    ${count_country}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]    #計算Country數
+    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]
+    ${country_index}    evaluate    ${count_country} -1
+    ${random_click}    evaluate    random.randint(0,${country_index})    random
+    Click Element    ${count}[${random_click}]
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
     Sleep    5
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/top_bar_right_icon
-    Swipe By Percent    50    60    50    50    2000
 
 Start 7-Day Free Trial
     [Tags]    Ethan
@@ -602,19 +610,11 @@ Choose Quality
     ${start_y}=    Evaluate    ${element_location['y']} * 1
     Click A Point    ${start_x}    ${start_Y}
 
-Relaunch APP and go to setting
-    [Tags]    WadeCW
-    Close Application
-    Open App
-    Pass Tutorial
-    Enter Setting
-
 Back from Quality
     [Tags]    Ethan
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
     Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
 
-<<<<<<< HEAD
 Subscribe Now
     [Tags]    Ethan
     #IAP page
@@ -630,5 +630,3 @@ Click Back up to Cloud
     #On Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
     Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
-=======
->>>>>>> 3ac8f862c6c596d4d612d43239177b8fbf170d08
