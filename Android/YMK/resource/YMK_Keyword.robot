@@ -630,3 +630,8 @@ Click Back up to Cloud
     #On Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
     Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+
+Back from Back up to Cloud
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/top_bar_btn_back
+    Click Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
