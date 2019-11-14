@@ -564,15 +564,232 @@ cam_exposure
     [Tags]    Sol
     Click Element    com.cyberlink.youperfect:id/ExposureSeekBar
 
+cam_beautify
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_beautify
+
+
+promotion_close
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/promote_close_btn
+
+settings
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/settingButton
+
+launch_with_camera
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Launch with camera"]/following-sibling::android.widget.Switch)
+
+auto_save_photo
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Auto save photo"]/following-sibling::android.widget.Switch)
+
+front_camera_mirror
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Front camera mirror"]/following-sibling::android.widget.Switch)
+
+countdown_sound_effect
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Countdown Sound Effect"]/following-sibling::android.widget.Switch)
+
+time_stamp
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Time stamp"]/following-sibling::android.widget.Switch)
+
+optimize_the_preview_quality
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Optimize the preview quality"]/following-sibling::android.widget.Switch)
+
+access_gps_location
+    [Tags]    Sol
+    Click Element    xpath=(//android.widget.TextView[@text="Access GPS location"]/following-sibling::android.widget.Switch)
+
+top_back
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/topbar_back_btn
+
+Ultra High
+    [Tags]    Sol
+    Get Element Attribute    com.cyberlink.youperfect:id/item_selected_image    Ultra High
+
+cam_record_switch
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/action_switch_mode
+
+cam_effect
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_effects
+
+cam_frame
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_frame
+
+cam_beautify_preset
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraBeautifyAddPresetBtn
+
+cam_timer
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraTimerButton
+
+cam_flash
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/flashModeButton
+
+cam_menu
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/camera_menu_btn
+
+cam_blur
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/liveBlurButton
+
+cam_ratio
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/liveAspratioButton
+
+cam_grid
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/liveLineButton
+
+cam_time_stamp
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraTimeStamp
+
+cam_mode_switch
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cameraSettingButton
+
+cam_general
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureGeneralButton
+
+cam_touch
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureTouchButton
+
+cam_detect
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureDetectButton
+
+cam_wave
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/captureWaveDetectButton
+
+cam_disable_enable_panel
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/tab_selector_close
+
+cam_effect_frame_store
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/effect_store_btn
+
+cam_beautify_tone
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/colorSelectBtn
+
+record_button
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/action_switch_mode
+
+record_stop
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/action_video_record_btn
+
+record_V_button
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/action_video_stop_btn
+
+video_preview_done
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/videoPlayDoneButton
+
+video_preview_delete
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/autoBeautifierBackBtn
+
+video_Ppreview_edit
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/videoEditButton
+
+result_page_home
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/HomeBtn
+
+result_page_library
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/LibraryBtn
+
+result_page_ad_close
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/ad_close_btn
+
+result_page_edit
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/videoEditBtn
+
+result_page_share
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/shareBtn
+
+result_page_cloud_album
+    [Tags]    Sol
+    Click Element    com.cyberlink.youperfect:id/cloudAlbumBtn
+
+Watch_Video_Repeat
+    [Tags]    Sol
+    Click Text    Smart HD PRO
+    Press Keycode    4
+    Sleep    1
+    dialog_ok
+
 cam_exposure_down
     [Tags]    Sol
     ${element_size}=    Get Element Size    id=com.cyberlink.youperfect:id/ExposureSeekBar
     ${element_location}=    Get Element Location    id=com.cyberlink.youperfect:id/ExposureSeekBar
     ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
-    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} *0.2)
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
     ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 1)
     Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+
+cam_exposure_up
+    [Tags]    Sol
+    ${element_size}=    Get Element Size    id=com.cyberlink.youperfect:id/ExposureSeekBar
+    ${element_location}=    Get Element Location    id=com.cyberlink.youperfect:id/ExposureSeekBar
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+
+cam_beautify_seekbar_100
+    [Tags]    Sol
+    ${element_size}=    Get Element Size    id=com.cyberlink.youperfect:id/beautifierSettingSlider
+    ${element_location}=    Get Element Location    id=com.cyberlink.youperfect:id/beautifierSettingSlider
+    ${start_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.1)
+    ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 1)
+    ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.5)
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    500
+
+
+swipe_effect_screen_add_favorite
+    [Tags]    Sol
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    30
+    \    Swipe By Percent    10    50    70    50    200
+    \    Long Press    com.cyberlink.youperfect:id/select_item_view    1000
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'Warm')]
+    \    Exit For Loop If    ${count}>0
+
+swipe_frame_from_the_least
+    [Tags]    Sol
+    Sleep    1
+    : FOR    ${i}    IN RANGE    1    6
+    \    Swipe By Percent    10    50    70    50    200
+
 
 beautify_auto
     [Tags]    Weiting
