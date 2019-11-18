@@ -9,8 +9,9 @@ Resource          resource/YMK_Keyword.robot
 *** Test Cases ***
 01. Camera and GPS
     Back from Setting
-    Start 7-Day Free Trial
+    Subscribe Now
     Enter Makeup Cam
+    Sleep    5
     Set counting to 3 seconds
     Take a photo
     Sleep    4
@@ -89,6 +90,9 @@ Resource          resource/YMK_Keyword.robot
     Back from Setting
     Enter Makeup Cam
     Take a photo
+    ${Save_button}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/saveButtonImage
+    Run keyword if    ${Save_button} == "True"    Run Keyword    Save the photo
+    Save the photo
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
     Click Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/before
@@ -101,12 +105,8 @@ Resource          resource/YMK_Keyword.robot
     Click Element    com.cyberlink.youcammakeup:id/homeButton
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
     Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
-    Sleep    5
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
-    Click Element    com.cyberlink.youcammakeup:id/bottom_bar_tab_add
-    Enter Setting
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoAutoPlayBtn
-    Click Element    com.cyberlink.youcammakeup:id/videoAutoPlayBtn
+    Sleep    10
+    Capture Page Screenshot    Back_up_to_cloud_without_Watermark
 
 03. Video
     Scroll down to Find    Autoplay
