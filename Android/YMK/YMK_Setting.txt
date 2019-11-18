@@ -7,11 +7,7 @@ Resource          resource/YMK_Keyword.robot
 *** Variables ***
 
 *** Test Cases ***
-01. Open Settings
-    Pass Tutorial
-    Enter Setting
-
-02. Camera and GPS
+01. Camera and GPS
     Back from Setting
     Start 7-Day Free Trial
     Enter Makeup Cam
@@ -34,7 +30,7 @@ Resource          resource/YMK_Keyword.robot
     Back from Makeup Cam
     Enter Setting
 
-03-1. Photo-Quality
+02-1. Photo-Quality
     Back from Setting
     Subscribe Now
     Enter Setting
@@ -81,7 +77,7 @@ Resource          resource/YMK_Keyword.robot
     Back from Result page
     Enter Setting
 
-03-2. Photo-Back up to cloud and Watermark
+02-2. Photo-Back up to cloud and Watermark
     Click Back up to Cloud
     Click Switch    Photo backup
     Log in    ethan1@a.com    aaaaaa
@@ -112,12 +108,12 @@ Resource          resource/YMK_Keyword.robot
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoAutoPlayBtn
     Click Element    com.cyberlink.youcammakeup:id/videoAutoPlayBtn
 
-04. Video
+03. Video
     Scroll down to Find    Autoplay
 
-05-1. Push Notifications-Push Notifications (Include BC setting)
+04-1. Push Notifications-Push Notifications (Include BC setting)
 
-05-2. Event & Version Updates-Show Event & Version Update notice
+04-2. Event & Version Updates-Show Event & Version Update notice
     [Tags]    WadeCW    #Not finish
     Sleep    1
     Scroll down to Find    Events & Version Updates
@@ -127,7 +123,7 @@ Resource          resource/YMK_Keyword.robot
     Randomly choose Notice
     Swipe By Percent    50    60    50    50    2000
 
-05-3. Country-Check BC post and sku data are correct after swithching country
+04-3. Country-Check BC post and sku data are correct after swithching country
     [Tags]    WadeCW    #Not finish
     Sleep    1
     Scroll down to Find    Country/Region
@@ -135,7 +131,7 @@ Resource          resource/YMK_Keyword.robot
     ...    2000
     Randomly switch Country/Region
 
-06-1.Tutorial-Play video normally
+05-1.Tutorial-Play video normally
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    Tutorials
@@ -144,7 +140,7 @@ Resource          resource/YMK_Keyword.robot
     ...    2000
     Randomly play video
 
-06-2. Rate us-Go to Google/Apple store
+05-2. Rate us-Go to Google/Apple store
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    Rate us
@@ -153,14 +149,14 @@ Resource          resource/YMK_Keyword.robot
     Sleep    5
     Capture Page Screenshot    filename=Rateusscreenshot.png
 
-06-3. Follow Us-Go FB page
+05-3. Follow Us-Go FB page
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    Follow Us
     Sleep    5
     Capture Page Screenshot    filename=Followusscreenshot.png
 
-06-4. FAQ & Send Feedback-Show FAQ page
+05-4. FAQ & Send Feedback-Show FAQ page
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    FAQ & Send Feedback
@@ -168,7 +164,7 @@ Resource          resource/YMK_Keyword.robot
     Wait Until Page Contains    Send feedback
     Capture Page Screenshot    filename=ShowFAQpagescreenshot.png
 
-06-5. FAQ & Send Feedback-Check if user feedback can be sent to server
+05-5. FAQ & Send Feedback-Check if user feedback can be sent to server
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    FAQ & Send Feedback
@@ -183,14 +179,14 @@ Resource          resource/YMK_Keyword.robot
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #點選OK
 
-06-6. About-Current Version
+05-6. About-Current Version
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    About
     Sleep    1
     Capture Page Screenshot    filename=CurrentVersionscreenshot.png
 
-06-7. About-Latest Version
+05-7. About-Latest Version
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    About
@@ -199,7 +195,7 @@ Resource          resource/YMK_Keyword.robot
     Sleep    1
     Capture Page Screenshot    filename=LatestVersionscreenshot.png
 
-06-8. About-Legal Notice
+05-8. About-Legal Notice
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    About
@@ -208,7 +204,7 @@ Resource          resource/YMK_Keyword.robot
     Sleep    1
     Capture Page Screenshot    filename=LegalNoticescreenshot.png
 
-06-9. Abour-Terms of Service
+05-9. Abour-Terms of Service
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    About
@@ -217,7 +213,7 @@ Resource          resource/YMK_Keyword.robot
     Sleep    1
     Capture Page Screenshot    filename=TermsofServicescreenshot.png
 
-06-10. About-Privacy Policy
+05-10. About-Privacy Policy
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    About
