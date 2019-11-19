@@ -106,6 +106,10 @@ Resource          resource/YMK_Keyword.robot
 
 03. Video
     Scroll down to Find    Autoplay
+    Set Network Connection Status    0
+    Log    Wi-Fi off
+    Set Network Connection Status    2
+    Log    Wi-Fi on
 
 04-1. Push Notifications-Push Notifications (Include BC setting)
 
