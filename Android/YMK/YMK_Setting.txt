@@ -140,9 +140,10 @@ Resource          resource/YMK_Keyword.robot
     [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    Rate us
-    Wait Until Page Contains Element    vivo:id/text1
-    Click Element    vivo:id/text1
-    Sleep    5
+    Go to store
+    #Wait Until Page Contains Element    vivo:id/text1
+    #Click Element    vivo:id/text1
+    #Sleep    5
     Capture Page Screenshot    filename=Rateusscreenshot.png
 
 05-3. Follow Us-Go FB page

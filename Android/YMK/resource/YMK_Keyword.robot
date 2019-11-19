@@ -691,3 +691,14 @@ Click Me page
     [Tags]    Ethan
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
     Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
+
+Go to store
+    [Tags]    WadeCW    #尚未完成
+    Sleep    5
+    ${button1}    Run Keyword And Return Status    Page Should Contain Element    vivo:id/text1
+    ${button2}    Run Keyword And Return Status    Page Should Contain Element    com.huawei.android.internal.app:id/icon
+    Run Keyword If    ${button1}==True    Run Keywords    Click Element    vivo:id/text1
+    ...    AND    Sleep    5
+    ...    ELSE IF    ${button2}==True    Run Keywords    Click Text    Google Play Store
+    ...    AND    Click Text    Just once
+    ...    AND    Sleep    5
