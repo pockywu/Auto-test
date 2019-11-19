@@ -81,10 +81,12 @@ Resource          resource/YMK_Keyword.robot
 02-2. Photo-Back up to cloud and Watermark
     Click Back up to Cloud
     Click Switch    Photo backup
+    Sleep    3
     Log in    ethan1@a.com    aaaaaa
     Click Switch    Video backup
     Back from Back up to Cloud
     Click Switch    Photo Watermark
+    Subscribe Now
     Scroll down to Find    Video Watermark
     Click Switch    Video Watermark
     Back from Setting
@@ -93,20 +95,14 @@ Resource          resource/YMK_Keyword.robot
     ${Save_button}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/saveButtonImage
     Run keyword if    ${Save_button} == "True"    Run Keyword    Save the photo
     Save the photo
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
-    Click Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/before
-    Click Element    com.cyberlink.youcammakeup:id/before
-    Sleep    3
-    Click Element At Coordinates    500    1900
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoSaveButton
-    Click Element    com.cyberlink.youcammakeup:id/videoSaveButton
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/homeButton
-    Click Element    com.cyberlink.youcammakeup:id/homeButton
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
-    Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
-    Sleep    10
-    Capture Page Screenshot    Back_up_to_cloud_without_Watermark
+    Switch to video mode
+    Start recording 3 seconds
+    Stop recording
+    Save the video
+    Back from video result page
+    Click Me page
+    Sleep    20
+    Capture Page Screenshot    Back_up_to_cloud_without_Watermark.png
 
 03. Video
     Scroll down to Find    Autoplay

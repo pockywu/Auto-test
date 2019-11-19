@@ -635,3 +635,37 @@ Back from Back up to Cloud
     [Tags]    Ethan
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/top_bar_btn_back
     Click Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
+
+Switch to video mode
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
+    Click Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
+
+Start recording 3 seconds
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/before
+    Click Element    com.cyberlink.youcammakeup:id/before
+    Sleep    3
+
+Stop recording
+    [Tags]    Ethan
+    ${screen_width}=    Get Window Width
+    ${element_location}=    Get Element Location    com.cyberlink.youcammakeup:id/category
+    ${start_x}=    Evaluate    ${screen_width} * 0.5
+    ${start_y}=    Evaluate    ${element_location['y']} + 90
+    Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Save the video
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoSaveButton
+    Click Element    com.cyberlink.youcammakeup:id/videoSaveButton
+
+Back from video result page
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/homeButton
+    Click Element    com.cyberlink.youcammakeup:id/homeButton
+
+Click Me page
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
+    Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
