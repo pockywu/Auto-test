@@ -110,14 +110,14 @@ Resource          resource/YMK_Keyword.robot
 04-1. Push Notifications-Push Notifications (Include BC setting)
 
 04-2. Event & Version Updates-Show Event & Version Update notice
-    [Tags]    WadeCW    #Not finish
+    [Tags]    WadeCW
     Sleep    1
     Scroll down to Find    Events & Version Updates
     Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
     Randomly Swipe    0    20    50    70    50    55
     ...    2000
     Randomly choose Notice
-    Swipe By Percent    50    60    50    50    2000
+    TapTryButton
 
 04-3. Country-Check BC post and sku data are correct after swithching country
     [Tags]    WadeCW    #Not finish
