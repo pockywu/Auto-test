@@ -84,7 +84,7 @@ Resource          resource/YMK_Keyword.robot
     Sleep    3
     Log in    ethan1@a.com    aaaaaa
     Click Switch    Video backup
-    Back from Back up to Cloud
+    Click Back    #From Back up to Cloud
     Click Switch    Photo Watermark
     Subscribe Now
     Scroll down to Find    Video Watermark
@@ -104,12 +104,31 @@ Resource          resource/YMK_Keyword.robot
     Sleep    20
     Capture Page Screenshot    Back_up_to_cloud_without_Watermark.png
 
-03. Video
+03. Video - Autoplay
     Scroll down to Find    Autoplay
+    Click    Never Autoplay Videos
+    Click Back    #From Autoplay
+    Scroll down to Find    Tutorials
+    Click the first video
+    Sleep    3
+    Capture Page Screenshot    Never_Autoplay_with_Wi-Fi.png
+    Click Back    #From the video
+    Click Back    #From Tutorials
+    Scroll down to Find    Autoplay
+    Click    Wi-Fi Only
+    Click Back    #From Autoplay
     Set Network Connection Status    0
     Log    Wi-Fi off
+    Scroll down to Find    Tutorials
+    Sleep    3
+    Capture Page Screenshot    Wi-Fi Only_without_Wi-Fi.png
+    Click Leave
     Set Network Connection Status    2
     Log    Wi-Fi on
+    Scroll down to Find    Tutorials
+    Click the first video
+    Sleep    5
+    Capture Page Screenshot    Wi-Fi Only_with_Wi-Fi.png
 
 04-1. Push Notifications-Push Notifications (Include BC setting)
 

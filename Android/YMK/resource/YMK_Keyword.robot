@@ -653,9 +653,10 @@ Click Back up to Cloud
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
     Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
 
-Back from Back up to Cloud
+Click Back
     [Tags]    Ethan
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/top_bar_btn_back
+    #in Setting
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
     Click Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
 
 Switch to video mode
@@ -702,3 +703,15 @@ Go to store
     ...    ELSE IF    ${button2}==True    Run Keywords    Click Text    Google Play Store
     ...    AND    Click Text    Just once
     ...    AND    Sleep    5
+
+Click the first video
+    [Tags]    Ethan
+    #in Tutorials
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
+    Click Element    com.cyberlink.youcammakeup:id/post_cover
+
+Click Leave
+    [Tags]    Ethan
+    #on Toast
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
