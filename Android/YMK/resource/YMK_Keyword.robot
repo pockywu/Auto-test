@@ -4,12 +4,12 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    8
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
 ${automationName}    UiAutomator2
-${noReset}        False    #True: don't reset when open app. False: reset when open app
+${noReset}        True    #True: don't reset when open app. False: reset when open app
 ${autoGrantPermissions}    True    #Auto allow permission
 
 *** Keywords ***
@@ -29,17 +29,6 @@ Open VPN
     Wait Until Page Contains    Brazil
     Click Text    Brazil
     Wait Until Page Contains    Connected
-
-Open Setting
-    [Tags]    WadeCW
-    Open App
-    Pass Tutorial
-    Enter Setting
-
-Close App
-    [Tags]    WadeCW
-    Close All Applications
-    Log    already close app
 
 Pass Tutorial
     [Tags]    Pocky
@@ -90,17 +79,20 @@ Select Sample Photo
 
 Subscribe
     [Tags]    Pocky
-    Click button    //*[@resource-id="root"]/android.view.View[1]/android.view.View[1]/android.view.View[7]/android.view.View[1]/android.widget.Button[1]
-    Sleep    3
-    Click button    com.android.vending:id/footer_placeholder    #按"SUBSCRIBE" button
-    ${status}    Run Keyword And Return Status    Wait Until Page Contains Element    com.android.vending:id/input    5
-    Run keyword if    ${status} > 0    Run Keywords    Input Password    com.android.vending:id/input    Pft24725102
-    ...    AND    Press Keycode    66    #66 is enter key
+    Wait Until Page Contains    Subscribe Now    timeout=10
+    Click Text    Subscribe Now
+    Wait Until Page Contains Element    com.android.vending:id/footer_placeholder
+    Click Element    com.android.vending:id/footer_placeholder
+    Wait Until Page Contains Element    com.android.vending:id/input
+    Input Password    com.android.vending:id/input    Pft24725102
+    Press Keycode    66    #66 is enter key
 
 Set photo quality
     [Arguments]    ${quality}
     [Tags]    Pocky
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherSettingButton
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton    #Tap setting button
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
     Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
     Click text    ${quality}
 
@@ -251,7 +243,6 @@ Click Switch
     [Arguments]    ${Settings_catrgory}
     [Tags]    Ethan
     #On Launcher Setting
-    Sleep    1
     ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
     ${screen_width}=    Get Window Width
     ${start_x}=    Evaluate    ${screen_width} * 0.9
@@ -267,7 +258,6 @@ Click on the specified button
 Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
-    Sleep    2
     : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
     \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
     \    Exit For Loop If    ${count}>0
@@ -288,7 +278,7 @@ Scroll down to Find specified button
 Save
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/topToolBarExportBtn    timeout=30
-    Sleep    5
+    Sleep    2
     Click Element    com.cyberlink.youcammakeup:id/topToolBarExportBtn
 
 Log in
@@ -313,12 +303,6 @@ Select Photo
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * ${row}) - ( ${element_size['height']} * 0.5)
     Click Element At Coordinates    ${start_x}    ${start_y}
 
-Click button
-    [Arguments]    ${element name}
-    [Tags]    Shura
-    Wait Until Element Is Visible    ${element name}    timeout=30
-    Click Element    ${element name}
-
 Back from Setting
     [Tags]    Ethan
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
@@ -337,61 +321,17 @@ Randomly Swipe
 Randomly play video
     [Tags]    WadeCW
     ${count_video}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]    #計算影片數
-    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]
+    ${count1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/post_cover')]
+    ${var}    Set Variable    ${count1}
     ${video_index}    evaluate    ${count_video} -1
     ${random_click}    evaluate    random.randint(0,${video_index})    random
-    Click Element    ${count}[${random_click}]
+    Click Element    ${var}[${random_click}]
     Sleep    1
     ${video_type1}=    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_play_icon
     Run Keyword If    '${video_type1}'=='True'    Click Element    com.cyberlink.youcammakeup:id/post_play_icon
-    ...    ELSE    Run Keyword    No Operation
+    ...    ELSE    Run Keyword    Sleep    1
     Sleep    10
     Capture Page Screenshot    filename=Tutorialsscreenshot.png
-
-Randomly choose Notice
-    [Tags]    WadeCW
-    ${count_notice}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/NoticeItemArrowDown')]    #計算Notice數
-    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/NoticeItemArrowDown')]
-    ${notice_index}    evaluate    ${count_notice} -1
-    ${random_click}    evaluate    random.randint(0,${notice_index})    random
-    Click Element    ${count}[${random_click}]
-    Sleep    5
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50
-    ...    50    2000
-    Sleep    10
-
-TapTryButton
-    [Tags]    WadeCW
-    Sleep    1
-    Swipe By Percent    50    60    50    50    2000
-    ${try_it_button}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_try_it_button
-    ${action_buy}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_action_buy
-    Run Keyword If    ${try_it_button}==True    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/post_try_it_button
-    ...    AND    Sleep    10
-    ...    AND    Capture Page Screenshot    filename=Versionscreenshot.png
-    ...    ELSE IF    ${action_buy}==True    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/post_action_buy
-    ...    AND    Sleep    10
-    ...    AND    Capture Page Screenshot    filename=Versionscreenshot.png
-    ...    ELSE    Run Keywords    Sleep    3
-    ...    AND    Press Keycode    4    None
-    ...    AND    Press Keycode    4    None
-    ...    AND    Scroll down to Find    Events & Version Updates
-    ...    AND    Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
-    ...    AND    Randomly Swipe    0    20    50    70
-    ...    50    55    2000
-    ...    AND    Randomly choose Notice
-    ...    AND    TapTryButton
-
-Randomly switch Country/Region
-    [Tags]    WadeCW
-    ${count_country}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]    #計算Country數
-    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]
-    ${country_index}    evaluate    ${count_country} -1
-    ${random_click}    evaluate    random.randint(0,${country_index})    random
-    Click Element    ${count}[${random_click}]
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
-    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
-    Sleep    5
 
 Start 7-Day Free Trial
     [Tags]    Ethan
@@ -622,96 +562,23 @@ Click Quality
     Click Element    com.cyberlink.youcammakeup:id/photoQualityRowBtn
 
 Choose Quality
-    [Arguments]    ${Quality_catrgory}
+    [Arguments]    ${Settings_catrgory}
     [Tags]    Ethan
     #On Setting - Photo Quality
-    Sleep    3
-    ${element_location}=    Get Element Location    xpath=//*[@text='${Quality_catrgory}']
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
     ${screen_width}=    Get Window Width
-    ${start_x}=    Evaluate    ${screen_width} * 0.7
-    ${start_y}=    Evaluate    ${element_location['y']} * 1
-    Click A Point    ${start_x}    ${start_Y}
-
-Back from Quality
-    [Tags]    Ethan
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
-    Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
-
-Subscribe Now
-    [Tags]    Ethan
-    #IAP page
-    Sleep    3
-    ${screen_width}=    Get Window Width
-    ${screen_height}=    Get Window Height
-    ${start_x}=    Evaluate    ${screen_width} * 0.5
-    ${start_y}=    Evaluate    ${screen_height} * 0.55
+    ${start_x}=    Evaluate    ${screen_width} * 0.9
+    ${start_y}=    Evaluate    ${element_location['y']}
     Click Element At Coordinates    ${start_x}    ${start_Y}
 
-Click Back up to Cloud
-    [Tags]    Ethan
-    #On Setting
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
-    Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+Relaunch APP and go to setting
+    [Tags]    WadeCW
+    Close Application
+    Open App
+    Pass Tutorial
+    Enter Setting
 
-Click Back
-    [Tags]    Ethan
-    #in Setting
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
-    Click Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
-
-Switch to video mode
-    [Tags]    Ethan
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
-    Click Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
-
-Start recording 3 seconds
-    [Tags]    Ethan
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/before
-    Click Element    com.cyberlink.youcammakeup:id/before
-    Sleep    3
-
-Stop recording
-    [Tags]    Ethan
-    ${screen_width}=    Get Window Width
-    ${element_location}=    Get Element Location    com.cyberlink.youcammakeup:id/category
-    ${start_x}=    Evaluate    ${screen_width} * 0.5
-    ${start_y}=    Evaluate    ${element_location['y']} + 90
-    Click Element At Coordinates    ${start_x}    ${start_Y}
-
-Save the video
-    [Tags]    Ethan
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoSaveButton
-    Click Element    com.cyberlink.youcammakeup:id/videoSaveButton
-
-Back from video result page
-    [Tags]    Ethan
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/homeButton
-    Click Element    com.cyberlink.youcammakeup:id/homeButton
-
-Click Me page
-    [Tags]    Ethan
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
-    Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
-
-Go to store
-    [Tags]    WadeCW    #尚未完成
-    Sleep    5
-    ${button1}    Run Keyword And Return Status    Page Should Contain Element    vivo:id/text1
-    ${button2}    Run Keyword And Return Status    Page Should Contain Element    com.huawei.android.internal.app:id/icon
-    Run Keyword If    ${button1}==True    Run Keywords    Click Element    vivo:id/text1
-    ...    AND    Sleep    5
-    ...    ELSE IF    ${button2}==True    Run Keywords    Click Text    Google Play Store
-    ...    AND    Click Text    Just once
-    ...    AND    Sleep    5
-
-Click the first video
-    [Tags]    Ethan
-    #in Tutorials
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
-    Click Element    com.cyberlink.youcammakeup:id/post_cover
-
-Click Leave
-    [Tags]    Ethan
-    #on Toast
-    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
-    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
+Close Rating Dialog
+    [Tags]    Pocky
+    ${card_show}=    Run keyword and return status    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/MessageDialogBackground
+    Run Keyword If    ${card_show}>0    Press Keycode    4
