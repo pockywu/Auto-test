@@ -234,6 +234,14 @@ Apply Pattern
     Sleep    1
     Click Element    @{element}[${order}]
 
+Apply Lip Art Pattern
+    [Arguments]    ${order}    # 0: 第一個 1: 第二個
+    [Tags]    Pocky
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/paletteImage    timeout=10
+    @{element}    Get Webelements    com.cyberlink.youcammakeup:id/paletteImage
+    Sleep    1
+    Click Element    @{element}[${order}]
+
 Click Switch Button
     [Tags]    Pocky
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/switchBtn

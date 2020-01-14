@@ -12,7 +12,7 @@ Library           AppiumLibrary
 0.2 Set photo quality to Smart HD and Subscribe
     [Tags]    Pocky
     Set photo quality    Smart HD
-    #Subscribe
+    Subscribe
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
     Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
@@ -30,7 +30,7 @@ Library           AppiumLibrary
     Click    Teeth Whitener
     Adjust Horizontal Seekbar
     Click    Lip Art
-    Apply Pattern    1
+    Apply Lip Art Pattern    3
     Scroll Makeup Menu
     Click    Face
     Adjust Horizontal Seekbar
@@ -61,13 +61,14 @@ Library           AppiumLibrary
     Apply Pattern    3
     Click    Face Shaper
     Adjust Horizontal Seekbar
+    Scroll Makeup Menu
     Click    Nose Enhance
     Adjust Horizontal Seekbar
-    Scroll Makeup Menu
     Click    Blemish
     Click Switch Button
     Click    Shine Removal
     Adjust Horizontal Seekbar
+    Scroll Makeup Menu
     Click    Eye
     Select PERFECT Brand
     Apply Color    4
@@ -224,3 +225,10 @@ Library           AppiumLibrary
     Click    SAVE
 
 test
+    Select Sample photo
+    Sleep    3
+    Click    Mouth
+    Select PERFECT Brand
+    Apply Color    1
+    Click    Lip Art
+    Apply Lip Art Pattern    3
