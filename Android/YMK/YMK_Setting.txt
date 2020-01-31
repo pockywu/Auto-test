@@ -142,7 +142,7 @@ Resource          resource/YMK_Keyword.robot
     Randomly Swipe    0    20    50    70    50    55
     ...    2000
     Randomly choose Notice
-    TapTryButton
+    Capture Page Screenshot    Show_Event_AND_Version_Update_notice.png
 
 04-3. Country-Check BC post and sku data are correct after swithching country
     [Tags]    WadeCW    #Not finish
