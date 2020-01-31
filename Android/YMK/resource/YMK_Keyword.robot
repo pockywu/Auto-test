@@ -262,6 +262,12 @@ Click Switch Button
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/switchBtn
     Click Element    com.cyberlink.youcammakeup:id/switchBtn
 
+Click button
+    [Arguments]    ${element name}
+    [Tags]    Shura
+    Wait Until Element Is Visible    ${element name}    timeout=30
+    Click Element    ${element name}
+
 Click Switch
     [Arguments]    ${Settings_catrgory}
     [Tags]    Ethan
@@ -605,3 +611,132 @@ Close Rating Dialog
     [Tags]    Pocky
     ${card_show}=    Run keyword and return status    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/MessageDialogBackground
     Run Keyword If    ${card_show}>0    Press Keycode    4
+
+Randomly choose Notice
+    [Tags]    WadeCW
+    ${count_notice}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/NoticeItemArrowDown')]    #計算Notice數
+    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/NoticeItemArrowDown')]
+    ${notice_index}    evaluate    ${count_notice} -1
+    ${random_click}    evaluate    random.randint(0,${notice_index})    random
+    Click Element    ${count}[${random_click}]
+    Sleep    5
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50
+    ...    50    2000
+    Sleep    10
+
+TapTryButton
+    [Tags]    WadeCW
+    Sleep    1
+    Swipe By Percent    50    60    50    50    2000
+    ${try_it_button}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_try_it_button
+    ${action_buy}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_action_buy
+    Run Keyword If    ${try_it_button}==True    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/post_try_it_button
+    ...    AND    Sleep    10
+    ...    AND    Capture Page Screenshot    filename=Versionscreenshot.png
+    ...    ELSE IF    ${action_buy}==True    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/post_action_buy
+    ...    AND    Sleep    10
+    ...    AND    Capture Page Screenshot    filename=Versionscreenshot.png
+    ...    ELSE    Run Keywords    Sleep    3
+    ...    AND    Press Keycode    4    None
+    ...    AND    Press Keycode    4    None
+    ...    AND    Scroll down to Find    Events & Version Updates
+    ...    AND    Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
+    ...    AND    Randomly Swipe    0    20    50    70
+    ...    50    55    2000
+    ...    AND    Randomly choose Notice
+    ...    AND    TapTryButton
+
+Randomly switch Country/Region
+    [Tags]    WadeCW
+    ${count_country}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]    #計算Country數
+    ${count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/country_name')]
+    ${country_index}    evaluate    ${count_country} -1
+    ${random_click}    evaluate    random.randint(0,${country_index})    random
+    Click Element    ${count}[${random_click}]
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive
+    Sleep    5
+
+Back from Quality
+    [Tags]    Ethan
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/aboutBackBtn
+    Click Element    com.cyberlink.youcammakeup:id/aboutBackBtn
+
+Subscribe Now
+    [Tags]    Ethan
+    #IAP page
+    Sleep    3
+    ${screen_width}=    Get Window Width
+    ${screen_height}=    Get Window Height
+    ${start_x}=    Evaluate    ${screen_width} * 0.5
+    ${start_y}=    Evaluate    ${screen_height} * 0.55
+    Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Click Back up to Cloud
+    [Tags]    Ethan
+    #On Setting
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+    Click Element    com.cyberlink.youcammakeup:id/CloudAlbumBtn
+
+Click Back
+    [Tags]    Ethan
+    #in Setting
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
+    Click Element    com.cyberlink.youcammakeup:id/top_bar_btn_back
+
+Switch to video mode
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
+    Click Element    com.cyberlink.youcammakeup:id/videoRecModeBtn
+
+Start recording 3 seconds
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/before
+    Click Element    com.cyberlink.youcammakeup:id/before
+    Sleep    3
+
+Stop recording
+    [Tags]    Ethan
+    ${element_location}=    Get Element Location    xpath=//*[@text='${Settings_catrgory}']
+    ${screen_width}=    Get Window Width
+    ${start_x}=    Evaluate    ${screen_width} * 0.9
+    ${start_y}=    Evaluate    ${element_location['y']}
+    Click Element At Coordinates    ${start_x}    ${start_Y}
+
+Save the video
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/videoSaveButton
+    Click Element    com.cyberlink.youcammakeup:id/videoSaveButton
+
+Back from video result page
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/homeButton
+    Click Element    com.cyberlink.youcammakeup:id/homeButton
+
+Click Me page
+    [Tags]    Ethan
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/bc_me_icon
+    Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
+
+Go to store
+    [Tags]    WadeCW    #尚未完成
+    Sleep    5
+    ${button1}    Run Keyword And Return Status    Page Should Contain Element    vivo:id/text1
+    ${button2}    Run Keyword And Return Status    Page Should Contain Element    com.huawei.android.internal.app:id/icon
+    Run Keyword If    ${button1}==True    Run Keywords    Click Element    vivo:id/text1
+    ...    AND    Sleep    5
+    ...    ELSE IF    ${button2}==True    Run Keywords    Click Text    Google Play Store
+    ...    AND    Click Text    Just once
+    ...    AND    Sleep    5
+
+Click the first video
+    [Tags]    Ethan
+    #in Tutorials
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
+    Click Element    com.cyberlink.youcammakeup:id/post_cover
+
+Click Leave
+    [Tags]    Ethan
+    #on Toast
+    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
+    Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
