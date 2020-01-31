@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
@@ -623,28 +623,6 @@ Randomly choose Notice
     Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50
     ...    50    2000
     Sleep    10
-
-TapTryButton
-    [Tags]    WadeCW
-    Sleep    1
-    Swipe By Percent    50    60    50    50    2000
-    ${try_it_button}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_try_it_button
-    ${action_buy}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/post_action_buy
-    Run Keyword If    ${try_it_button}==True    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/post_try_it_button
-    ...    AND    Sleep    10
-    ...    AND    Capture Page Screenshot    filename=Versionscreenshot.png
-    ...    ELSE IF    ${action_buy}==True    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/post_action_buy
-    ...    AND    Sleep    10
-    ...    AND    Capture Page Screenshot    filename=Versionscreenshot.png
-    ...    ELSE    Run Keywords    Sleep    3
-    ...    AND    Press Keycode    4    None
-    ...    AND    Press Keycode    4    None
-    ...    AND    Scroll down to Find    Events & Version Updates
-    ...    AND    Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
-    ...    AND    Randomly Swipe    0    20    50    70
-    ...    50    55    2000
-    ...    AND    Randomly choose Notice
-    ...    AND    TapTryButton
 
 Randomly switch Country/Region
     [Tags]    WadeCW
