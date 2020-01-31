@@ -18,6 +18,21 @@ Open App
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
     ...    appActivity=${appActivity}    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
 
+Open Application and enter setting
+    [Tags]    WadeCW
+    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
+    ...    appActivity=${appActivity}    noReset=True    autoGrantPermissions=${autoGrantPermissions}
+    ${showsettingbutton}    Run keyword and Return Status    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Run keyword If    ${showsettingbutton}>0    Sleep    1
+    ...    ELSE    Pass Tutorial
+    Quit Application
+
+Launch Application and enter setting
+    [Tags]    WadeCW
+    Launch Application
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+
 Open VPN
     [Tags]    Pocky
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=com.fvcorp.flyclient

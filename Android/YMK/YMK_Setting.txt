@@ -1,6 +1,8 @@
 *** Settings ***
-Test Setup        Open Setting
-Test Teardown     Close App
+Suite Setup       Open Application and enter setting
+Suite Teardown    Close Application
+Test Setup        Launch Application and enter setting
+Test Teardown     Quit Application
 Library           AppiumLibrary
 Resource          resource/YMK_Keyword.robot
 
