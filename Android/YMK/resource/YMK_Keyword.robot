@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    8
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
@@ -697,7 +697,7 @@ Click Me page
     Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
 
 Go to store
-    [Tags]    WadeCW    #尚未完成
+    [Tags]    WadeCW    #尚未完成，不同device會有不同button id
     Sleep    5
     ${button1}    Run Keyword And Return Status    Page Should Contain Element    vivo:id/text1
     ${button2}    Run Keyword And Return Status    Page Should Contain Element    com.huawei.android.internal.app:id/icon
