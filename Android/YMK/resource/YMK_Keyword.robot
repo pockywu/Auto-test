@@ -18,11 +18,12 @@ Open App
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
     ...    appActivity=${appActivity}    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
 
-Open Application and enter setting
+Open Application and Pass Tutorial and Set Library Order
     [Tags]    WadeCW
+    Set Library Search Order    AppiumLibrary    SikuliLibrary    SeleniumLibrary
     Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
     ...    appActivity=${appActivity}    noReset=True    autoGrantPermissions=${autoGrantPermissions}
-    ${showsettingbutton}    Run keyword and Return Status    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherSettingButton
+    ${showsettingbutton}    Run keyword and Return Status    AppiumLibrary.Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bc_me_icon
     Run keyword If    ${showsettingbutton}>0    Sleep    1
     ...    ELSE    Pass Tutorial
     Quit Application
@@ -30,8 +31,16 @@ Open Application and enter setting
 Launch Application and enter setting
     [Tags]    WadeCW
     Launch Application
-    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherSettingButton
-    Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bc_me_icon
+    #Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
+    Click Element    com.cyberlink.youcammakeup:id/bc_me_icon
+    Click Element    com.cyberlink.youcammakeup:id/bc_top_bar_left_btn
+
+Launch Application and enter Makeup Cam
+    [Tags]    WadeCW
+    Launch Application
+    Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
+    Click Element    com.cyberlink.youcammakeup:id/launcherMakeupCamBtn
 
 Open VPN
     [Tags]    Pocky
@@ -718,3 +727,16 @@ Click Leave
     #on Toast
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
+
+Randomly_apply_look
+    [Tags]    WadeCW    #尚未完成最後的部分
+    ${count_look}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
+    @{count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index}    evaluate    ${count_look} -1
+    ${random_click}    evaluate    random.randint(0,${look_index})    random
+    Click Element    @{count}[${random_click}]
+    Sleep    1
+    ${shopLookButton}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/shopLookButton
+    Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/effectGridPhoto
+    ...    AND    Randomly_apply_look
+    ...    ELSE    Run Keyword    Log    123    #若click到special look則重來

@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Open Application and enter setting
+Suite Setup       Open Application and Pass Tutorial and Set Library Order
 Suite Teardown    Close Application
 Test Setup        Launch Application and enter setting
 Test Teardown     Quit Application
