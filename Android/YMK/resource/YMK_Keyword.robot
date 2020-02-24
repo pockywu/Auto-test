@@ -343,13 +343,23 @@ Back from Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
     Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
 
-Randomly Swipe
+Randomly Swipe by Percent
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
     Sleep    1
     FOR    ${j}    IN RANGE    0    ${swipe_count}
         Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+        Exit For Loop If    ${j}==${swipe_count}
+    END
+
+Randomly Swipe by corrdinate
+    [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    [Tags]    WadeCW
+    ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
+    Sleep    1
+    FOR    ${j}    IN RANGE    0    ${swipe_count}
+        Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
         Exit For Loop If    ${j}==${swipe_count}
     END
 
@@ -725,14 +735,20 @@ Click Leave
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
 
 Randomly_apply_look
-    [Tags]    WadeCW    #尚未完成最後的部分
+    [Tags]    WadeCW
     ${count_look}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
     @{count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
     ${look_index}    evaluate    ${count_look} -1
-    ${random_click}    evaluate    random.randint(0,${look_index})    random
-    Click Element    @{count}[${random_click}]
+    ${First_look_location}    Get element location    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${Last_look_location}    Get element location    @{count}[${look_index}]
+    Randomly Swipe by corrdinate    1    4    ${Last_look_location['x']}    ${Last_look_location['y']}    ${First_look_location['x']}    ${First_look_location['y']}    2000
+    ${count_look_1}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
+    @{count_1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index_1}    evaluate    ${count_look_1} -1
+    ${random_click_1}    evaluate    random.randint(0,${look_index_1})    random
+    Click Element    @{count_1}[${random_click_1}]
     Sleep    1
-    ${shopLookButton}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/shopLookButton
-    Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/effectGridPhoto
-    ...    AND    Randomly_apply_look
-    ...    ELSE    Run Keyword    Log    123    #若click到special look則重來
+    ${shopLookButton}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon    #若click到special look則重來
+    Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    @{count_1}[0]
+    ...    AND    Click Element    @{count_1}[2]
+    ...    ELSE    Run Keyword    No Operation
