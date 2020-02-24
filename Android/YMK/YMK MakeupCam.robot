@@ -13,7 +13,7 @@ Resource          resource/YMK_Keyword.robot
     Click Element    com.cyberlink.youcammakeup:id/effectGridCheck
     Sleep    5
     Page Should Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon
-    Capture Page Screenshot    wadewwwwww123.png
+    Capture Page Screenshot    downloadcollection.png
 
 01-2. Makeup collection-Show in-place download collection in Premium tab (not subscribe)
 
@@ -26,3 +26,4 @@ Resource          resource/YMK_Keyword.robot
     Click Text    LOOKS
     Randomly_apply_look
     Sleep    3
+    Capture Page Screenshot    LOOKCheckEffect.png
