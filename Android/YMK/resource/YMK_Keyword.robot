@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    9
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
@@ -748,7 +748,29 @@ Randomly_apply_look
     ${random_click_1}    evaluate    random.randint(0,${look_index_1})    random
     Click Element    @{count_1}[${random_click_1}]
     Sleep    1
-    ${shopLookButton}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon    #若click到special look則重來
+    ${shopLookButton}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon    #若click到premium look則重來
     Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    @{count_1}[0]
     ...    AND    Click Element    @{count_1}[2]
     ...    ELSE    Run Keyword    No Operation
+
+Randomly_apply_premium_look
+    [Tags]    WadeCW
+    ${count_look}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
+    @{count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index}    evaluate    ${count_look} -1
+    ${First_look_location}    Get element location    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${Last_look_location}    Get element location    @{count}[${look_index}]
+    Randomly Swipe by corrdinate    0    1    ${Last_look_location['x']}    ${Last_look_location['y']}    ${First_look_location['x']}    ${First_look_location['y']}    2000
+    ${count_look_1}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算往右滑動之後的LOOK數
+    @{count_1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index_1}    evaluate    ${count_look_1} -1
+    ${random_click_1}    evaluate    random.randint(0,${look_index_1})    random
+    Click Element    @{count_1}[${random_click_1}]
+    Sleep    2
+    Page Should Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon
+    ${count_look_2}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectDownloadIcon')]    #計算effectDownloadIcon數
+    @{count_2}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectDownloadIcon')]
+    ${look_index_2}    evaluate    ${count_look_2} -1
+    ${random_click_2}    evaluate    random.randint(0,${look_index_2})    random
+    Click Element    @{count_2}[${random_click_2}]    #click premium_look(含有effectDownloadIcon)
+    Sleep    3
