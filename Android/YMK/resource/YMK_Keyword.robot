@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    9
+${platformVersion}    10
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
@@ -68,6 +68,7 @@ Download sample photos
     Swipe    400    300    400    1000    400
     ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
     Exit For Loop If    ${count}>0
+
     Click text    YouCam Makeup Sample
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo
 
@@ -308,7 +309,6 @@ Scroll down to Find specified button
         Swipe By Percent    50    70    50    20    2000
         ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
         Exit For Loop If    ${count}>0
-    END
     Click Element    ${resource-id}
 
 Save
@@ -344,7 +344,9 @@ Back from Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
     Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
 
+
 Randomly Swipe by Percent
+
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
@@ -352,7 +354,7 @@ Randomly Swipe by Percent
     FOR    ${j}    IN RANGE    0    ${swipe_count}
         Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
         Exit For Loop If    ${j}==${swipe_count}
-    END
+
 
 Randomly Swipe by corrdinate
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
@@ -363,6 +365,7 @@ Randomly Swipe by corrdinate
         Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
         Exit For Loop If    ${j}==${swipe_count}
     END
+
 
 Randomly play video
     [Tags]    WadeCW
