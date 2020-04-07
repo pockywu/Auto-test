@@ -64,10 +64,10 @@ Download sample photos
     [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #Tap Yes button on the downlaoding sample photo dialog
     Wait Until Page Does Not Contain Element    com.cyberlink.youcammakeup:id/bc_upload_dialog_message    timeout=100
-    FOR    ${i}    IN RANGE    1    20    #向上划直到找到"YouCam Makeup Sample" text
-    Swipe    400    300    400    1000    400
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-    Exit For Loop If    ${count}>0
+    : FOR    ${i}    IN RANGE    1    20    #向上划直到找到"YouCam Makeup Sample" text
+    \    Swipe    400    300    400    1000    400
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+    \    Exit For Loop If    ${count}>0
     Click text    YouCam Makeup Sample
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo
 
@@ -77,10 +77,10 @@ Select Album
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
-    FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${folderName}')]
-    Exit For Loop If    ${count}>0
-    Swipe    400    1000    400    300    400
+    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
+    \   ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${folderName}')]
+    \   Exit For Loop If    ${count}>0
+    \   Swipe    400    1000    400    300    400
     Click text    ${folderName}
 
 Select Sample Photo
@@ -88,10 +88,10 @@ Select Sample Photo
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    3
-    FOR    ${i}    IN RANGE    1    20
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-        Exit For Loop If    ${count}>0
-        Swipe    400    1000    400    300    400
+    : FOR    ${i}    IN RANGE    1    20
+    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+    \    Exit For Loop If    ${count}>0
+    \    Swipe    400    1000    400    300    400
     Click text    YouCam Makeup Sample
     ${dialog}    Run Keyword And Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    timeout=2
     Run Keyword if    ${dialog}>0    Download sample photos
@@ -122,10 +122,10 @@ Switch Country
     [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
     Sleep    1
-    FOR    ${i}    IN RANGE    1    20    #向下划直到找到"Contry/Region" text
-    Swipe    400    1000    400    300    400
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${region}')]
-    Exit For Loop If    ${count}>0
+    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"Contry/Region" text
+    \   Swipe    400    1000    400    300    400
+    \   ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${region}')]
+    \   Exit For Loop If    ${count}>0
     ${countrySetting}    Run keyword and Return Status    Wait Until Page Contains    ${country}
     Run keyword if    ${countrySetting}==0    Run Keywords    Click text    ${region}
     ...    AND    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/country_picker_search_bar
@@ -230,10 +230,10 @@ Select PERFECT Brand
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.2)
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
     ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
-    FOR    ${i}    IN RANGE    1    10
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
-    Exit For Loop If    ${count}>0
-    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
+    : FOR    ${i}    IN RANGE    1    10
+    \   ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
+    \   Exit For Loop If    ${count}>0
+    \   Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
     Click    PERFECT
 
 Scroll Makeup Menu
@@ -293,20 +293,21 @@ Click on the specified button
 Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
-    FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
-    Exit For Loop If    ${count}>0
-    Swipe    400    1000    400    300    400
+    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
+    \   ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
+    \   Exit For Loop If    ${count}>0
+    \   Swipe    400    1000    400    300    400
+    END
     Click text    ${Name}
 
 Scroll down to Find specified button
-    [Arguments]    ${resource-id}    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    [Arguments]    ${resource-id}
     [Tags]    WadeCW
     Sleep    1
-    FOR    ${i}    IN RANGE    ${min_times}    ${max_times}    #向下划直到找到resource-id
-    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-    ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
-    Exit For Loop If    ${count}>0
+    : FOR    ${i}    IN RANGE    0    20    #向下划直到找到resource-id
+    \   Swipe By Percent    50    70    50    20    2000
+    \   ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
+    \   Exit For Loop If    ${count}>0
     Click Element    ${resource-id}
 
 Save
@@ -347,18 +348,18 @@ Randomly Swipe by Percent
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
     Sleep    1
-    FOR    ${j}    IN RANGE    0    ${swipe_count}
-    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-    Exit For Loop If    ${j}==${swipe_count}
+    : FOR    ${j}    IN RANGE    0    ${swipe_count}
+    \   Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    \   Exit For Loop If    ${j}==${swipe_count}
 
 Randomly Swipe by corrdinate
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
     Sleep    1
-    FOR    ${j}    IN RANGE    0    ${swipe_count}
-        Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-        Exit For Loop If    ${j}==${swipe_count}
+    : FOR    ${j}    IN RANGE    0    ${swipe_count}
+    \   Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    \   Exit For Loop If    ${j}==${swipe_count}
     END
 
 Randomly play video
@@ -750,6 +751,7 @@ Randomly_apply_look
     Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    @{count_1}[0]
     ...    AND    Click Element    @{count_1}[2]
     ...    ELSE    Run Keyword    No Operation
+    Set Global Variable    ${Variable1}    @{count_1}[0]
 
 Randomly_apply_premium_look
     [Tags]    WadeCW

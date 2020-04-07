@@ -141,7 +141,7 @@ Resource          resource/YMK_Keyword.robot
 04-2. Event & Version Updates-Show Event & Version Update notice
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/eventsAndVersionBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/eventsAndVersionBtn
     Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
     Randomly Swipe    0    20    50    70    50    55    2000
     Randomly choose Notice
@@ -150,14 +150,14 @@ Resource          resource/YMK_Keyword.robot
 04-3. Country-Check BC post and sku data are correct after swithching country
     [Tags]    WadeCW    #Not finish
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/countryBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/countryBtn
     Randomly Swipe    0    30    50    80    50    20    2000
     Randomly switch Country/Region
 
 05-1.Tutorial-Play video normally
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/tutorialBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/tutorialBtn
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/post_cover
     Randomly Swipe    0    10    50    70    50    20    2000
     Randomly play video
@@ -165,7 +165,7 @@ Resource          resource/YMK_Keyword.robot
 05-2. Rate us-Go to Google/Apple store
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/rateUsBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/rateUsBtn
     Go to store
     #Wait Until Page Contains Element    vivo:id/text1
     #Click Element    vivo:id/text1
@@ -175,14 +175,14 @@ Resource          resource/YMK_Keyword.robot
 05-3. Follow Us-Go FB page
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/followUsBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/followUsBtn
     Sleep    5
     Capture Page Screenshot    filename=Followusscreenshot.png
 
 05-4. FAQ & Send Feedback-Show FAQ page
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/sendFeedbackBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/sendFeedbackBtn
     Sleep    20
     Wait Until Page Contains    Send feedback
     Capture Page Screenshot    filename=ShowFAQpagescreenshot.png
@@ -190,7 +190,7 @@ Resource          resource/YMK_Keyword.robot
 05-5. FAQ & Send Feedback-Check if user feedback can be sent to server
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/sendFeedbackBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/sendFeedbackBtn
     Sleep    20
     Wait Until Page Contains    Send feedback
     Click Text    Send feedback
@@ -205,14 +205,14 @@ Resource          resource/YMK_Keyword.robot
 05-6. About-Current Version
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn
     Sleep    1
     Capture Page Screenshot    filename=CurrentVersionscreenshot.png
 
 05-7. About-Latest Version
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn
     Sleep    1
     Click Text    Latest Version
     Sleep    1
@@ -221,7 +221,7 @@ Resource          resource/YMK_Keyword.robot
 05-8. About-Legal Notice
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn
     Sleep    1
     Click Text    Legal Notice
     Sleep    1
@@ -230,7 +230,7 @@ Resource          resource/YMK_Keyword.robot
 05-9. Abour-Terms of Service
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn
     Sleep    1
     Click Text    Terms of Service
     Sleep    1
@@ -239,7 +239,7 @@ Resource          resource/YMK_Keyword.robot
 05-10. About-Privacy Policy
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn    0    20    50    70    50    20    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/aboutBtn
     Sleep    1
     Click Text    Privacy Policy
     Sleep    1
