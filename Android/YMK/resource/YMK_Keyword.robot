@@ -294,17 +294,18 @@ Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
     FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
-    Exit For Loop If    ${count}>0
-    Swipe    400    1000    400    300    400
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
+        Exit For Loop If    ${count}>0
+        Swipe    400    1000    400    300    400
+    END
     Click text    ${Name}
 
 Scroll down to Find specified button
-    [Arguments]    ${resource-id}    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    [Arguments]    ${resource-id}
     [Tags]    WadeCW
     Sleep    1
-    FOR    ${i}    IN RANGE    ${min_times}    ${max_times}    #向下划直到找到resource-id
-        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    FOR    ${i}    IN RANGE    0    20    #向下划直到找到resource-id
+        Swipe By Percent    50    70    50    20    2000
         ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
         Exit For Loop If    ${count}>0
     END
@@ -752,6 +753,7 @@ Randomly_apply_look
     Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    @{count_1}[0]
     ...    AND    Click Element    @{count_1}[2]
     ...    ELSE    Run Keyword    No Operation
+    Set Global Variable    ${Variable1}    @{count_1}[0]
 
 Randomly_apply_premium_look
     [Tags]    WadeCW
