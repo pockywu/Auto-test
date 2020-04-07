@@ -65,9 +65,10 @@ Download sample photos
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #Tap Yes button on the downlaoding sample photo dialog
     Wait Until Page Does Not Contain Element    com.cyberlink.youcammakeup:id/bc_upload_dialog_message    timeout=100
     FOR    ${i}    IN RANGE    1    20    #向上划直到找到"YouCam Makeup Sample" text
-        Swipe    400    300    400    1000    400
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-        Exit For Loop If    ${count}>0
+    Swipe    400    300    400    1000    400
+    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+    Exit For Loop If    ${count}>0
+
     Click text    YouCam Makeup Sample
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo
 
@@ -78,9 +79,9 @@ Select Album
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
     FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${folderName}')]
-        Exit For Loop If    ${count}>0
-        Swipe    400    1000    400    300    400
+    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${folderName}')]
+    Exit For Loop If    ${count}>0
+    Swipe    400    1000    400    300    400
     Click text    ${folderName}
 
 Select Sample Photo
@@ -89,9 +90,9 @@ Select Sample Photo
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    3
     FOR    ${i}    IN RANGE    1    20
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-        Exit For Loop If    ${count}>0
-        Swipe    400    1000    400    300    400
+    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+    Exit For Loop If    ${count}>0
+    Swipe    400    1000    400    300    400
     Click text    YouCam Makeup Sample
     ${dialog}    Run Keyword And Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    timeout=2
     Run Keyword if    ${dialog}>0    Download sample photos
@@ -123,9 +124,9 @@ Switch Country
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
     Sleep    1
     FOR    ${i}    IN RANGE    1    20    #向下划直到找到"Contry/Region" text
-        Swipe    400    1000    400    300    400
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${region}')]
-        Exit For Loop If    ${count}>0
+    Swipe    400    1000    400    300    400
+    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${region}')]
+    Exit For Loop If    ${count}>0
     ${countrySetting}    Run keyword and Return Status    Wait Until Page Contains    ${country}
     Run keyword if    ${countrySetting}==0    Run Keywords    Click text    ${region}
     ...    AND    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/country_picker_search_bar
@@ -231,9 +232,9 @@ Select PERFECT Brand
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
     ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
     FOR    ${i}    IN RANGE    1    10
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
-        Exit For Loop If    ${count}>0
-        Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
+    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
+    Exit For Loop If    ${count}>0
+    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
     Click    PERFECT
 
 Scroll Makeup Menu
@@ -294,9 +295,9 @@ Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
     FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
-        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
-        Exit For Loop If    ${count}>0
-        Swipe    400    1000    400    300    400
+    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
+    Exit For Loop If    ${count}>0
+    Swipe    400    1000    400    300    400
     Click text    ${Name}
 
 Scroll down to Find specified button
@@ -342,7 +343,9 @@ Back from Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
     Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
 
-Randomly Swipe
+
+Randomly Swipe by Percent
+
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
@@ -350,6 +353,18 @@ Randomly Swipe
     FOR    ${j}    IN RANGE    0    ${swipe_count}
         Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
         Exit For Loop If    ${j}==${swipe_count}
+
+
+Randomly Swipe by corrdinate
+    [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    [Tags]    WadeCW
+    ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
+    Sleep    1
+    FOR    ${j}    IN RANGE    0    ${swipe_count}
+        Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+        Exit For Loop If    ${j}==${swipe_count}
+    END
+
 
 Randomly play video
     [Tags]    WadeCW
@@ -723,14 +738,42 @@ Click Leave
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonNegative
 
 Randomly_apply_look
-    [Tags]    WadeCW    #尚未完成最後的部分
+    [Tags]    WadeCW
     ${count_look}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
     @{count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
     ${look_index}    evaluate    ${count_look} -1
-    ${random_click}    evaluate    random.randint(0,${look_index})    random
-    Click Element    @{count}[${random_click}]
+    ${First_look_location}    Get element location    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${Last_look_location}    Get element location    @{count}[${look_index}]
+    Randomly Swipe by corrdinate    1    4    ${Last_look_location['x']}    ${Last_look_location['y']}    ${First_look_location['x']}    ${First_look_location['y']}    2000
+    ${count_look_1}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
+    @{count_1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index_1}    evaluate    ${count_look_1} -1
+    ${random_click_1}    evaluate    random.randint(0,${look_index_1})    random
+    Click Element    @{count_1}[${random_click_1}]
     Sleep    1
-    ${shopLookButton}    Run Keyword And Return Status    Page Should Contain Element    com.cyberlink.youcammakeup:id/shopLookButton
-    Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    com.cyberlink.youcammakeup:id/effectGridPhoto
-    ...    AND    Randomly_apply_look
-    ...    ELSE    Run Keyword    Log    123    #若click到special look則重來
+    ${shopLookButton}    Run Keyword And Return Status    Page Should Not Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon    #若click到premium look則重來
+    Run Keyword If    ${shopLookButton}==False    Run Keywords    Click Element    @{count_1}[0]
+    ...    AND    Click Element    @{count_1}[2]
+    ...    ELSE    Run Keyword    No Operation
+
+Randomly_apply_premium_look
+    [Tags]    WadeCW
+    ${count_look}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算LOOK數
+    @{count}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index}    evaluate    ${count_look} -1
+    ${First_look_location}    Get element location    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${Last_look_location}    Get element location    @{count}[${look_index}]
+    Randomly Swipe by corrdinate    0    1    ${Last_look_location['x']}    ${Last_look_location['y']}    ${First_look_location['x']}    ${First_look_location['y']}    2000
+    ${count_look_1}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]    #計算往右滑動之後的LOOK數
+    @{count_1}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectGridCheck')]
+    ${look_index_1}    evaluate    ${count_look_1} -1
+    ${random_click_1}    evaluate    random.randint(0,${look_index_1})    random
+    Click Element    @{count_1}[${random_click_1}]
+    Sleep    2
+    Page Should Contain Element    com.cyberlink.youcammakeup:id/effectDownloadIcon
+    ${count_look_2}    Get Matching Xpath Count    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectDownloadIcon')]    #計算effectDownloadIcon數
+    @{count_2}    Get Webelements    //*[contains(@resource-id,'com.cyberlink.youcammakeup:id/effectDownloadIcon')]
+    ${look_index_2}    evaluate    ${count_look_2} -1
+    ${random_click_2}    evaluate    random.randint(0,${look_index_2})    random
+    Click Element    @{count_2}[${random_click_2}]    #click premium_look(含有effectDownloadIcon)
+    Sleep    3
