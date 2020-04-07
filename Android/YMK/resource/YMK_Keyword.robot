@@ -4,7 +4,7 @@ Library           AppiumLibrary
 *** Variables ***
 ${REMOTE_URL}     http://localhost:4723/wd/hub
 ${platformName}    Android
-${platformVersion}    8
+${platformVersion}    10
 ${deviceName}     Android
 ${appPackage}     com.cyberlink.youcammakeup
 ${appActivity}    activity.SplashActivity
@@ -15,14 +15,12 @@ ${autoGrantPermissions}    True    #Auto allow permission
 *** Keywords ***
 Open App
     [Tags]    Pocky
-    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
-    ...    appActivity=${appActivity}    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
+    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}    appActivity=${appActivity}    noReset=${noReset}    autoGrantPermissions=${autoGrantPermissions}
 
 Open Application and Pass Tutorial and Set Library Order
     [Tags]    WadeCW
     Set Library Search Order    AppiumLibrary    SikuliLibrary    SeleniumLibrary
-    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}
-    ...    appActivity=${appActivity}    noReset=True    autoGrantPermissions=${autoGrantPermissions}
+    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=${appPackage}    appActivity=${appActivity}    noReset=True    autoGrantPermissions=${autoGrantPermissions}
     ${showsettingbutton}    Run keyword and Return Status    AppiumLibrary.Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/bc_me_icon
     Run keyword If    ${showsettingbutton}>0    Sleep    1
     ...    ELSE    Pass Tutorial
@@ -44,8 +42,7 @@ Launch Application and enter Makeup Cam
 
 Open VPN
     [Tags]    Pocky
-    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=com.fvcorp.flyclient
-    ...    appActivity=com.fvcorp.android.fvclient.activity.SplashActivity    noReset=True    autoGrantPermissions=${autoGrantPermissions}
+    Open Application    ${REMOTE_URL}    platformName=${platformName}    platformVersion=${platformVersion}    deviceName=${deviceName}    automationName=${automationName}    appPackage=com.fvcorp.flyclient    appActivity=com.fvcorp.android.fvclient.activity.SplashActivity    noReset=True    autoGrantPermissions=${autoGrantPermissions}
     Sleep    3
     Click Element    com.fvcorp.flyclient:id/selectedServer
     Wait Until Page Contains    America
@@ -67,10 +64,10 @@ Download sample photos
     [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    #Tap Yes button on the downlaoding sample photo dialog
     Wait Until Page Does Not Contain Element    com.cyberlink.youcammakeup:id/bc_upload_dialog_message    timeout=100
-    : FOR    ${i}    IN RANGE    1    20    #向上划直到找到"YouCam Makeup Sample" text
-    \    Swipe    400    300    400    1000    400
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-    \    Exit For Loop If    ${count}>0
+    FOR    ${i}    IN RANGE    1    20    #向上划直到找到"YouCam Makeup Sample" text
+        Swipe    400    300    400    1000    400
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+        Exit For Loop If    ${count}>0
     Click text    YouCam Makeup Sample
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo
 
@@ -80,10 +77,10 @@ Select Album
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    2
-    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${folderName}')]
-    \    Exit For Loop If    ${count}>0
-    \    Swipe    400    1000    400    300    400
+    FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${folderName} " text
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${folderName}')]
+        Exit For Loop If    ${count}>0
+        Swipe    400    1000    400    300    400
     Click text    ${folderName}
 
 Select Sample Photo
@@ -91,10 +88,10 @@ Select Sample Photo
     Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    3
-    : FOR    ${i}    IN RANGE    1    20
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-    \    Exit For Loop If    ${count}>0
-    \    Swipe    400    1000    400    300    400
+    FOR    ${i}    IN RANGE    1    20
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+        Exit For Loop If    ${count}>0
+        Swipe    400    1000    400    300    400
     Click text    YouCam Makeup Sample
     ${dialog}    Run Keyword And Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    timeout=2
     Run Keyword if    ${dialog}>0    Download sample photos
@@ -125,10 +122,10 @@ Switch Country
     [Tags]    Pocky
     Click Element    com.cyberlink.youcammakeup:id/launcherSettingButton
     Sleep    1
-    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"Contry/Region" text
-    \    Swipe    400    1000    400    300    400
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${region}')]
-    \    Exit For Loop If    ${count}>0
+    FOR    ${i}    IN RANGE    1    20    #向下划直到找到"Contry/Region" text
+        Swipe    400    1000    400    300    400
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${region}')]
+        Exit For Loop If    ${count}>0
     ${countrySetting}    Run keyword and Return Status    Wait Until Page Contains    ${country}
     Run keyword if    ${countrySetting}==0    Run Keywords    Click text    ${region}
     ...    AND    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/country_picker_search_bar
@@ -233,10 +230,10 @@ Select PERFECT Brand
     ${start_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.2)
     ${end_x}=    Evaluate    ${element_location['x']} + (${element_size['width']} * 0.5)
     ${end_y}=    Evaluate    ${element_location['y']} + (${element_size['height']} * 0.8)
-    : FOR    ${i}    IN RANGE    1    10
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
-    \    Exit For Loop If    ${count}>0
-    \    Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
+    FOR    ${i}    IN RANGE    1    10
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'PERFECT')]
+        Exit For Loop If    ${count}>0
+        Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    800
     Click    PERFECT
 
 Scroll Makeup Menu
@@ -296,21 +293,20 @@ Click on the specified button
 Scroll down to Find
     [Arguments]    ${Name}
     [Tags]    Pocky
-    : FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
-    \    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
-    \    Exit For Loop If    ${count}>0
-    \    Swipe    400    1000    400    300    400
+    FOR    ${i}    IN RANGE    1    20    #向下划直到找到"${Name} " text
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, '${Name}')]
+        Exit For Loop If    ${count}>0
+        Swipe    400    1000    400    300    400
     Click text    ${Name}
 
 Scroll down to Find specified button
-    [Arguments]    ${resource-id}    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}
-    ...    ${end_y}    ${duration}
+    [Arguments]    ${resource-id}    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     Sleep    1
-    : FOR    ${i}    IN RANGE    ${min_times}    ${max_times}    #向下划直到找到resource-id
-    \    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-    \    ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
-    \    Exit For Loop If    ${count}>0
+    FOR    ${i}    IN RANGE    ${min_times}    ${max_times}    #向下划直到找到resource-id
+        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+        ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
+        Exit For Loop If    ${count}>0
     Click Element    ${resource-id}
 
 Save
@@ -347,14 +343,13 @@ Back from Setting
     Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
 
 Randomly Swipe
-    [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}
-    ...    ${duration}
+    [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
     Sleep    1
-    : FOR    ${j}    IN RANGE    0    ${swipe_count}
-    \    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-    \    Exit For Loop If    ${j}==${swipe_count}
+    FOR    ${j}    IN RANGE    0    ${swipe_count}
+        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+        Exit For Loop If    ${j}==${swipe_count}
 
 Randomly play video
     [Tags]    WadeCW
@@ -629,8 +624,7 @@ Randomly choose Notice
     ${random_click}    evaluate    random.randint(0,${notice_index})    random
     Click Element    ${count}[${random_click}]
     Sleep    5
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50
-    ...    50    2000
+    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn    0    5    50    60    50    50    2000
     Sleep    10
 
 Randomly switch Country/Region
