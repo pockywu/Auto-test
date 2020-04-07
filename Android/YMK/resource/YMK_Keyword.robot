@@ -68,7 +68,6 @@ Download sample photos
     Swipe    400    300    400    1000    400
     ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
     Exit For Loop If    ${count}>0
-
     Click text    YouCam Makeup Sample
     Click Element    com.cyberlink.youcammakeup:id/photoItemImage    #Tap the first photo
 
@@ -90,9 +89,9 @@ Select Sample Photo
     Click Element    com.cyberlink.youcammakeup:id/launcherNaturalMakeupBtn
     Sleep    3
     FOR    ${i}    IN RANGE    1    20
-    ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
-    Exit For Loop If    ${count}>0
-    Swipe    400    1000    400    300    400
+        ${count}    Get Matching Xpath Count    xpath=//*[contains(@text, 'YouCam Makeup Sample')]
+        Exit For Loop If    ${count}>0
+        Swipe    400    1000    400    300    400
     Click text    YouCam Makeup Sample
     ${dialog}    Run Keyword And Return Status    Wait Until Page Contains Element    com.cyberlink.youcammakeup:id/alertDialog_buttonPositive    timeout=2
     Run Keyword if    ${dialog}>0    Download sample photos
@@ -305,9 +304,9 @@ Scroll down to Find specified button
     [Tags]    WadeCW
     Sleep    1
     FOR    ${i}    IN RANGE    ${min_times}    ${max_times}    #向下划直到找到resource-id
-        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-        ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
-        Exit For Loop If    ${count}>0
+    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    ${count}    Get Matching Xpath Count    //*[contains(@resource-id,'${resource-id}')]
+    Exit For Loop If    ${count}>0
     Click Element    ${resource-id}
 
 Save
@@ -343,17 +342,14 @@ Back from Setting
     Wait Until Element Is Visible    com.cyberlink.youcammakeup:id/btn_setting_back
     Click Element    com.cyberlink.youcammakeup:id/btn_setting_back
 
-
 Randomly Swipe by Percent
-
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
     [Tags]    WadeCW
     ${swipe_count}    evaluate    random.randint(${min_times},${max_times})    random
     Sleep    1
     FOR    ${j}    IN RANGE    0    ${swipe_count}
-        Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
-        Exit For Loop If    ${j}==${swipe_count}
-
+    Swipe By Percent    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
+    Exit For Loop If    ${j}==${swipe_count}
 
 Randomly Swipe by corrdinate
     [Arguments]    ${min_times}    ${max_times}    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
@@ -364,7 +360,6 @@ Randomly Swipe by corrdinate
         Swipe    ${start_x}    ${start_y}    ${end_x}    ${end_y}    ${duration}
         Exit For Loop If    ${j}==${swipe_count}
     END
-
 
 Randomly play video
     [Tags]    WadeCW
