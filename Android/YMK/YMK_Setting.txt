@@ -141,10 +141,13 @@ Resource          resource/YMK_Keyword.robot
 04-2. Event & Version Updates-Show Event & Version Update notice
     [Tags]    WadeCW
     Sleep    1
-    Scroll down to Find specified button    com.cyberlink.youcammakeup:id/eventsAndVersionBtn
+    Scroll down to Find    Events & Version Updates
     Wait Until Page Contains    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
-    Randomly Swipe    0    20    50    70    50    55    2000
-    Randomly choose Notice
+    Click Element    com.cyberlink.youcammakeup:id/NoticeItemArrowDown
+    Click Element    com.cyberlink.youcammakeup:id/NoticeItemChildDownloadBtn
+    #Randomly Swipe by Percent    0    20    50    70    50    55    2000
+    #Randomly choose Notice
+    Sleep    3
     Capture Page Screenshot    Show_Event_AND_Version_Update_notice.png
 
 04-3. Country-Check BC post and sku data are correct after swithching country
